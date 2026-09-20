@@ -1,4 +1,4 @@
-name: CEdev CI
+name: CEdev
 
 on:
   push:
