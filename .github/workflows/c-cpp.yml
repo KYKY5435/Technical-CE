@@ -1,0 +1,40 @@
+name: CEdev CI
+
+on:
+  push:
+    branches: [ "main" ]
+  pull_request:
+    branches: [ "main" ]
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    env:
+      CEDEV_VERSION: v10.5  # bump this manually when you want a refresh
+      CEDEV: ${{ github.workspace }}/CEdev
+
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/cache@v4
+        id: cedev-cache
+        with:
+          path: ${{ env.CEDEV }}
+          key: cedev-linux-${{ env.CEDEV_VERSION }}
+      - name: Download CEdev toolchain
+        if: steps.cedev-cache.outputs.cache-hit != 'true'
+        run: |
+          curl -L -o CEdev.tar.gz \
+            https://github.com/CE-Programming/toolchain/releases/download/${{ env.CEDEV_VERSION }}/CEdev-Linux.tar.gz
+          tar -xzf CEdev.tar.gz -C ${{ github.workspace }}
+      - name: Add CEdev to PATH
+        run: echo "${{ env.CEDEV }}/bin" >> "$GITHUB_PATH"
+      - name: make
+        run: make
+      - name: Get date
+        id: date
+        run: echo "today=$(date +'%Y-%m-%d')" >> "$GITHUB_OUTPUT"
+      - uses: actions/upload-artifact@v4
+        with:
+          name: build-${{ steps.date.outputs.today }}
+          path: ${{ github.workspace }}/bin/Technicl.8xp
+        
