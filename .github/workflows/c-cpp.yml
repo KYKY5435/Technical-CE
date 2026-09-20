@@ -12,7 +12,7 @@ jobs:
     env:
       FORCE_JAVASCRIPT_ACTIONS_TO_NODE24: true
       CEDEV_VERSION: v15.0  # bump this manually when refresh
-      CEDEV: ${{ github.workspace }}/CEdev-Linux.tar.gz
+      CEDEV: ${{ github.workspace }}/CEdev
 
     steps:
       - uses: actions/checkout@v4
@@ -24,8 +24,8 @@ jobs:
       - name: Download CEdev toolchain
         if: steps.cedev-cache.outputs.cache-hit != 'true'
         run: |
-          curl -L https://github.com/CE-Programming/toolchain/releases/download/${{ env.CEDEV_VERSION }}/CEdev-Linux.tar.gz
-          tar -xzf CEdev-Linux.tar.gz -C ${{ github.workspace }}
+          curl -L -o CEdev.tar.gz https://github.com/CE-Programming/toolchain/releases/download/${{ env.CEDEV_VERSION }}/CEdev-Linux.tar.gz
+          tar -xzf CEdev.tar.gz -C ${{ github.workspace }}
       - name: Add CEdev to PATH
         run: echo "${{ env.CEDEV }}/bin" >> "$GITHUB_PATH"
       - name: make
