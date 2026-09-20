@@ -1,0 +1,35 @@
+palettes:
+  - name: game8
+    fixed-entries:
+      - color: {index: 0x0, r: 0x00, g: 0x00, b: 0x00} #black
+      - color: {index: 0x1, r: 0xff, g: 0xff, b: 0xff} #white
+      - color: {index: 0x2, r: 0xff, g: 0x00, b: 0x4d} #ff004d
+      - color: {index: 0x3, r: 0xec, g: 0xd4, b: 0x85} #ecd485
+      - color: {index: 0x4, r: 0x7d, g: 0x00, b: 0x00} #7d0000
+      - color: {index: 0x5, r: 0xc9, g: 0x00, b: 0x00} #c90000
+      - color: {index: 0x6, r: 0x20, g: 0x94, b: 0xb3} #2094b3
+      - color: {index: 0x7, r: 0x23, g: 0xb6, b: 0xdf} #23b6df
+converts:
+  - name: gameTiles
+    palette: game8
+    transparent-color-index: 0xff
+    tilesets:
+      tile-width: 16
+      tile-height: 16
+      images:
+        - gameTiles.png
+  - name: gameSprites
+    palette: game8
+    transparent-color-index: 0xff
+    images:
+      - cursor.png
+
+
+outputs:
+  - type: c
+    include-file: gfx.h
+    palettes:
+      - game8
+    converts:
+      - gameTiles
+      - gameSprites

@@ -1,0 +1,18 @@
+{
+    "configurations": [
+        {
+            "name": "Win32",
+            "includePath": [
+                "${workspaceFolder}/**",
+                "C:/Users/Tri-America/Downloads/CEdev-Windows/CEdev/include/"
+            ],
+            "defines": [
+                "_DEBUG",
+                "UNICODE",
+                "_UNICODE"
+            ],
+            "compilerPath": "C:/Users/Tri-America/Downloads/CEdev-Windows/CEdev/bin/ez80-clang.exe"
+        }
+    ],
+    "version": 4
+}
