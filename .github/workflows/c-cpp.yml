@@ -28,6 +28,8 @@ jobs:
           tar -xzf CEdev.tar.gz -C ${{ github.workspace }}
       - name: Add CEdev to PATH
         run: echo "${{ env.CEDEV }}/bin" >> "$GITHUB_PATH"
+      - name: make clean
+        run: make clean
       - name: make
         run: make
       - name: Get date
