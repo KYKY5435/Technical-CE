@@ -1,4 +1,4 @@
-name: CEdev
+name: Technical-build
 
 on:
   push:
