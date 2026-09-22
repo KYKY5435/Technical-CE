@@ -17,8 +17,8 @@
 
 #include "gfx/gfx.h"
 
-extern const uint24_t BASE_X = GFX_LCD_WIDTH;
-extern const uint8_t BASE_Y  = GFX_LCD_HEIGHT;
+extern constexpr uint24_t BASE_X = GFX_LCD_WIDTH;
+extern constexpr uint8_t BASE_Y  = GFX_LCD_HEIGHT;
 
 #define NUMBER_OF_TILES 16
 #define TILE_SIZE 16
