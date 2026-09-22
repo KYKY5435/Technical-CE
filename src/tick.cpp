@@ -8,13 +8,11 @@
 
 #include "random.h"
 #include "draw.h"
+#include "game.h"
 
 #include "gfx/gfx.h"
 
 #include "TINYSTL/unordered_map.h"
-
-const uint8_t BASE_X = GFX_LCD_WIDTH / 2;
-const uint8_t BASE_Y = GFX_LCD_HEIGHT / 2;
 
 const uint8_t TILE_SIZE = 16;
 
