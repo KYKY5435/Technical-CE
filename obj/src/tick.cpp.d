@@ -39,5 +39,5 @@ obj/src/tick.cpp.bc: src\tick.cpp \
   src\random.h src\TINYSTL\unordered_map.h src\TINYSTL\allocator.h \
   src\TINYSTL\stddef.h src\TINYSTL\buffer.h src\TINYSTL\new.h \
   src\TINYSTL\traits.h src\TINYSTL\hash.h src\TINYSTL\hash_base.h \
-  src\draw.h src\gfx\gfx.h src\gfx\game8.h src\gfx\gameTiles.h \
-  src\gfx\cursor.h
+  src\draw.h src\game.h src\gfx\gfx.h src\gfx\game8.h \
+  src\gfx\gameTiles.h src\gfx\cursor.h
