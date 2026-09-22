@@ -17,8 +17,7 @@
 
 #include "gfx/gfx.h"
 
-constexpr uint24_t BASE_X = GFX_LCD_WIDTH;
-constexpr uint8_t BASE_Y  = GFX_LCD_HEIGHT;
+#include "game.h"
 
 #define NUMBER_OF_TILES 16
 #define TILE_SIZE 16
