@@ -41,4 +41,4 @@ obj/src/draw.cpp.bc: src\draw.cpp \
   src\TINYSTL\stddef.h src\TINYSTL\buffer.h src\TINYSTL\new.h \
   src\TINYSTL\traits.h src\TINYSTL\hash.h src\TINYSTL\hash_base.h \
   src\perlin.h src\gfx\gfx.h src\gfx\game8.h src\gfx\gameTiles.h \
-  src\gfx\cursor.h
+  src\gfx\cursor.h src\game.h

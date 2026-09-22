@@ -33,4 +33,5 @@ obj/src/random.cpp.bc: src\random.cpp \
   C:\Users\Tri-America\Downloads\CEdev-Windows\CEdev\include\c++\cstddef \
   src\TINYSTL\unordered_map.h src\TINYSTL\allocator.h \
   src\TINYSTL\stddef.h src\TINYSTL\buffer.h src\TINYSTL\new.h \
-  src\TINYSTL\traits.h src\TINYSTL\hash.h src\TINYSTL\hash_base.h
+  src\TINYSTL\traits.h src\TINYSTL\hash.h src\TINYSTL\hash_base.h \
+  src\perlin.h

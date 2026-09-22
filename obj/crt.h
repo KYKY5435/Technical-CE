@@ -62,10 +62,6 @@ _gfx_SetDraw:
 	.type _gfx_SwapDraw, @function
 _gfx_SwapDraw:
 	jp 30
-	.global _gfx_BlitRectangle
-	.type _gfx_BlitRectangle, @function
-_gfx_BlitRectangle:
-	jp 39
 	.global _gfx_PrintUInt
 	.type _gfx_PrintUInt, @function
 _gfx_PrintUInt:
@@ -94,10 +90,6 @@ _gfx_SetMonospaceFont:
 	.type _gfx_FillRectangle_NoClip, @function
 _gfx_FillRectangle_NoClip:
 	jp 126
-	.global _gfx_SetClipRegion
-	.type _gfx_SetClipRegion, @function
-_gfx_SetClipRegion:
-	jp 129
 	.global _gfx_AllocSprite
 	.type _gfx_AllocSprite, @function
 _gfx_AllocSprite:

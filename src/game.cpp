@@ -17,8 +17,8 @@
 
 #include "gfx/gfx.h"
 
-#define BASE_X GFX_LCD_WIDTH
-#define BASE_Y GFX_LCD_HEIGHT
+uint24_t BASE_X = GFX_LCD_WIDTH;
+uint8_t BASE_Y  = GFX_LCD_HEIGHT;
 
 #define NUMBER_OF_TILES 16
 #define TILE_SIZE 16
@@ -33,7 +33,7 @@ uint24_t x = 0, y = 0;
 void init()
 {
     kb_SetMode(MODE_3_CONTINUOUS);
-    gfx_SetClipRegion(0, 0, BASE_X, BASE_Y);
+    //gfx_SetClipRegion(0, 0, BASE_X, BASE_Y);
     gfx_SetMonospaceFont(8);
     // lcd_Control = 0x13925; // 4bpp //not anymore
     gfx_ZeroScreen();
@@ -179,7 +179,7 @@ void game()
                 gfx_Sprite_NoClip(curser_bg, 64, 32);
                 gfx_SetDrawBuffer();
 
-                gfx_SetClipRegion(0, 0, BASE_X, BASE_Y - 3 * TILE_SIZE / 2);
+                //gfx_SetClipRegion(0, 0, BASE_X, BASE_Y - 3 * TILE_SIZE / 2);
                 render_level(seed, modified_tiles, x, y, false, generateHorizontal, generateTopLeft, cx, cy, 2);
                 x += (generateTopLeft) ? -cx : cx;
                 y += (generateTopLeft) ? -cy : cy;
@@ -194,25 +194,6 @@ void game()
                 gfx_GetSprite_NoClip(curser_bg, 64, 32);
                 gfx_TransparentSprite_NoClip(cursor, 64, 32);
 
-                gfx_SetDrawBuffer();
-
-                gfx_SetDrawScreen();
-                gfx_ZeroScreen();
-
-                for (uint8_t i = 0; i < 8; i++)
-                {
-                    for (uint8_t j = 0; j < 8 - 1; j++)
-                    {
-                        gfx_SetTextXY(TILE_SIZE * i * 2, TILE_SIZE * j * 2);
-                        if (perlin2d(2*(x+i), 2*(y+j)) <=50) {
-                            gfx_Sprite(gameTiles_tiles[28], TILE_SIZE*i*2, TILE_SIZE*j*2);
-                        } else {
-                            gfx_Sprite(gameTiles_tiles[0], TILE_SIZE*i*2, TILE_SIZE*j*2);
-                        } 
-
-                        gfx_PrintUInt(perlin2d(2*(x + i), 2*(y + j)), 3);
-                    }
-                }
                 gfx_SetDrawBuffer();
             }
         }

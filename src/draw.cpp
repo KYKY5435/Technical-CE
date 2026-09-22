@@ -9,11 +9,11 @@
 #include "TINYSTL/unordered_map.h"
 
 #include "gfx/gfx.h"
-
-const uint8_t BASE_X = GFX_LCD_WIDTH / 2;
-const uint8_t BASE_Y = GFX_LCD_HEIGHT / 2;
+#include "game.h"
 
 #define TILE_SIZE 16
+
+#define WIDTH_OFFSET 5
 
 void render_level(uint24_t seed, const tinystl::unordered_map<uint24_t, uint8_t> modified_tiles, uint24_t x, uint24_t y, bool whole_level, bool generateHorizontal, bool generateTopLeft, uint8_t cx, uint8_t cy, const uint8_t speed)
 {
@@ -21,12 +21,12 @@ void render_level(uint24_t seed, const tinystl::unordered_map<uint24_t, uint8_t>
     {
         gfx_SetDrawBuffer();
         gfx_ZeroScreen();
-        gfx_PrintStringXY("Loading", 52, 56);
+        gfx_PrintStringXY("Loading", 0, 0);
         
         gfx_SwapDraw();
-        for (uint8_t i = 0; i < BASE_X / TILE_SIZE; i++)
+        for (uint8_t i = 0; i < BASE_X / TILE_SIZE - WIDTH_OFFSET; i++)
         {
-            for (uint8_t j = 0; j < BASE_Y / TILE_SIZE - 1; j++)
+            for (uint8_t j = 0; j < BASE_Y / TILE_SIZE; j++)
             {
                 gfx_Sprite_NoClip(gameTiles_tiles[hashTerrain(seed, (x + i), (y + j), modified_tiles)], TILE_SIZE * i, TILE_SIZE * j);
             }
@@ -49,21 +49,18 @@ void render_level(uint24_t seed, const tinystl::unordered_map<uint24_t, uint8_t>
                 }
                 for (uint8_t i = speed; i <= TILE_SIZE; i += speed)
                 {
-                    gfx_CopyRectangle(gfx_screen, gfx_buffer, 0, 0, 0, cy * speed, BASE_X, BASE_Y - 3 * TILE_SIZE / 2 - cy * speed);
-                    for (uint8_t j = 0; j < BASE_X / TILE_SIZE; j++)
+                    gfx_CopyRectangle(gfx_screen, gfx_buffer, 0, 0, 0, cy * speed, BASE_X - TILE_SIZE * WIDTH_OFFSET, BASE_Y - cy * speed);
+                    for (uint8_t j = 0; j < BASE_X / TILE_SIZE - WIDTH_OFFSET; j++)
                     {
                         gfx_Sprite(gameTiles_tiles[new_tiles[j]], j * TILE_SIZE, -1 * TILE_SIZE + cy * i);
                     }
-                    gfx_BlitRectangle(gfx_buffer, 0, 0, 160, 96);
-                    gfx_SetDrawScreen();
-                    
-                    gfx_SetDrawBuffer();
+                    gfx_SwapDraw();
                 }
             }
             else
             {
                 // cy = 1
-                newcoord = y + cy + (BASE_Y - TILE_SIZE / 2) / TILE_SIZE - 2;
+                newcoord = y + cy + BASE_Y / TILE_SIZE;
                 uint8_t new_tiles[BASE_X / TILE_SIZE];
                 for (uint8_t j = 0; j < BASE_X / TILE_SIZE; j++)
                 {
@@ -71,15 +68,12 @@ void render_level(uint24_t seed, const tinystl::unordered_map<uint24_t, uint8_t>
                 }
                 for (uint8_t i = speed; i <= TILE_SIZE; i += speed)
                 {
-                    gfx_CopyRectangle(gfx_screen, gfx_buffer, 0, cy * speed, 0, 0, BASE_X, BASE_Y - 3 * TILE_SIZE / 2 - cy * speed);
-                    for (uint8_t j = 0; j < BASE_X / TILE_SIZE; j++)
+                    gfx_CopyRectangle(gfx_screen, gfx_buffer, 0, cy * speed, 0, 0, BASE_X - TILE_SIZE * WIDTH_OFFSET, BASE_Y - cy * speed);
+                    for (uint8_t j = 0; j < BASE_X / TILE_SIZE - WIDTH_OFFSET; j++)
                     {
-                        gfx_Sprite(gameTiles_tiles[new_tiles[j]], j * TILE_SIZE, BASE_Y - 3 * TILE_SIZE / 2 - cy * i);
+                        gfx_Sprite(gameTiles_tiles[new_tiles[j]], j * TILE_SIZE, BASE_Y - cy * i);
                     }
-                    gfx_BlitRectangle(gfx_buffer, 0, 0, 160, 96);
-                    gfx_SetDrawScreen();
-                    
-                    gfx_SetDrawBuffer();
+                    gfx_SwapDraw();
                 }
             }
         }
@@ -102,10 +96,7 @@ void render_level(uint24_t seed, const tinystl::unordered_map<uint24_t, uint8_t>
                     {
                         gfx_Sprite(gameTiles_tiles[new_tiles[j]], -1 * TILE_SIZE + cx * i, j * TILE_SIZE);
                     }
-                    gfx_BlitRectangle(gfx_buffer, 0, 0, 160, 96);
-                    gfx_SetDrawScreen();
-                    
-                    gfx_SetDrawBuffer();
+                    gfx_SwapDraw();
                 }
             }
             else
@@ -124,10 +115,7 @@ void render_level(uint24_t seed, const tinystl::unordered_map<uint24_t, uint8_t>
                     {
                         gfx_Sprite(gameTiles_tiles[new_tiles[j]], BASE_X - cx * i, j * TILE_SIZE);
                     }
-                    gfx_BlitRectangle(gfx_buffer, 0, 0, 160, 96);
-                    gfx_SetDrawScreen();
-
-                    gfx_SetDrawBuffer();
+                    gfx_SwapDraw();
                 }
             }
         }
