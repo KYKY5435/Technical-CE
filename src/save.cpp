@@ -18,7 +18,7 @@ void writeSave(uint24_t seed, uint24_t x, uint24_t y, uint8_t &current_selection
     gfx_ZeroScreen();
     gfx_PrintStringXY("Saving", 116, 136); //y-4, x-24
     gfx_SwapDraw();
-    uint8_t save = ti_Open("PGSV", "w+");
+    uint8_t save = ti_Open("Techsav", "w+");
     ti_Rewind(save);
     ti_Write(&seed, sizeof(seed), 1, save);
     ti_Write(&x, sizeof(x), 1, save);
@@ -53,12 +53,12 @@ void writeSave(uint24_t seed, uint24_t x, uint24_t y, uint8_t &current_selection
 
 void readSave(uint24_t &seed, uint24_t &x, uint24_t &y, uint8_t &current_selection, tinystl::unordered_map<uint24_t, uint8_t> &modified_tiles)
 {
-    uint8_t save = ti_Open("PGSV", "r+");
+    uint8_t save = ti_Open("Techsav", "r+");
 
     if (save == 0)
     {
         seed = create_randSeed();
-        save = ti_Open("PGSV", "w+");
+        save = ti_Open("Techsav", "w+");
         ti_Rewind(save);
         ti_Write(&seed, sizeof(seed), 1, save);
         uint24_t readCount = 0;
