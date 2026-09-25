@@ -107,7 +107,7 @@ __Z12render_leveljN7tinystl13unordered_mapIjhNS_9allocatorEEEjjbbbhhh: ; @_Z12re
 	ld	hl, -107
 	call	__frameset
 	ld	hl, 1
-	ld	iy, 0
+	ld	de, 0
 	bit	0, (ix + 18)
 	jp	z, .LBB2_7
 ; %bb.1:
@@ -129,11 +129,11 @@ __Z12render_leveljN7tinystl13unordered_mapIjhNS_9allocatorEEEjjbbbhhh: ; @_Z12re
 	pop	hl
 	call	_gfx_SwapDraw
 	ld	iy, 0
+	ld	bc, 15
 	.local	.LBB2_2
 .LBB2_2:                                ; =>This Loop Header: Depth=1
                                         ;     Child Loop BB2_4 Depth 2
 	lea	hl, iy + 0
-	ld	bc, 15
 	or	a, a
 	sbc	hl, bc
 	jp	z, .LBB2_46
@@ -227,50 +227,53 @@ __Z12render_leveljN7tinystl13unordered_mapIjhNS_9allocatorEEEjjbbbhhh: ; @_Z12re
 	.local	.LBB2_7
 .LBB2_7:
 	ld	a, (ix + 24)
-	ld	b, (ix + 33)
+	ld	h, (ix + 33)
 	bit	0, (ix + 21)
 	jp	z, .LBB2_12
 ; %bb.8:
-	ld	c, (ix + 30)
-	or	a, a
-	sbc	hl, hl
-	ex	de, hl
-	ld	e, c
+	ld	l, (ix + 30)
+	ld	bc, 0
+	ld	c, l
 	bit	0, a
-	ld	(ix - 86), c
-	ld	(ix - 85), b
-	ld	(ix - 89), de
+	ld	(ix - 83), l
+	ld	(ix - 82), h
+	ld	(ix - 86), bc
 	lea	hl, ix - 32
 	jp	z, .LBB2_16
 ; %bb.9:
-	ld	(ix - 95), hl
-	lea	hl, ix - 44
 	ld	(ix - 92), hl
+	lea	hl, ix - 44
+	ld	(ix - 89), hl
 	ld	hl, (ix + 15)
 	or	a, a
-	sbc	hl, de
+	sbc	hl, bc
 	ld	(ix - 98), hl
-	ld	(ix - 83), iy
+	ld	bc, 20
+	push	hl
+	ld	l, (ix - 83)
+	ld	h, (ix - 82)
+	ex	(sp), hl
+	pop	iy
 	.local	.LBB2_10
 .LBB2_10:                               ; =>This Inner Loop Header: Depth=1
-	ld	hl, (ix - 83)
-	ld	de, 20
+	push	de
+	pop	hl
 	or	a, a
-	sbc	hl, de
+	sbc	hl, bc
 	jp	z, .LBB2_19
 ; %bb.11:                               ;   in Loop: Header=BB2_10 Depth=1
 	ld	hl, (ix + 12)
-	ld	de, (ix - 83)
+	ld	(ix - 95), de
 	add	hl, de
 	ld	(ix - 101), hl
 	ld	hl, (ix + 9)
 	push	hl
-	ld	hl, (ix - 92)
+	ld	hl, (ix - 89)
 	push	hl
 	call	__ZN7tinystl13unordered_mapIjhNS_9allocatorEEC2ERKS2_
 	pop	hl
 	pop	hl
-	ld	hl, (ix - 92)
+	ld	hl, (ix - 89)
 	push	hl
 	ld	hl, (ix - 98)
 	push	hl
@@ -282,58 +285,67 @@ __Z12render_leveljN7tinystl13unordered_mapIjhNS_9allocatorEEEjjbbbhhh: ; @_Z12re
 	pop	hl
 	pop	hl
 	pop	hl
-	ld	hl, (ix - 95)
-	ld	de, (ix - 83)
+	ld	hl, (ix - 92)
+	ld	de, (ix - 95)
 	add	hl, de
 	ld	(hl), a
-	ld	hl, (ix - 92)
+	ld	hl, (ix - 89)
 	push	hl
 	call	__ZN7tinystl13unordered_mapIjhNS_9allocatorEED2Ev
-	ld	c, (ix - 86)
-	ld	b, (ix - 85)
-	ld	iy, 0
+	push	hl
+	ld	l, (ix - 83)
+	ld	h, (ix - 82)
+	ex	(sp), hl
+	pop	iy
 	pop	hl
-	ld	hl, (ix - 83)
-	inc	hl
-	ld	(ix - 83), hl
+	ld	de, (ix - 95)
+	inc	de
+	ld	bc, 20
 	jr	.LBB2_10
 	.local	.LBB2_12
 .LBB2_12:
-	ld	de, 0
-	ld	e, (ix + 27)
+	ld	l, (ix + 27)
+	ex	de, hl
+	ld	iyl, e
+	ex	de, hl
+	ld	bc, 0
+	ld	c, iyl
 	bit	0, a
-	ld	(ix - 86), de
+	ld	(ix - 83), bc
+	lea	hl, ix - 32
 	jp	z, .LBB2_25
 ; %bb.13:
-	lea	hl, ix - 32
-	ld	(ix - 92), hl
-	lea	hl, ix - 68
 	ld	(ix - 89), hl
+	lea	hl, ix - 68
+	ld	(ix - 86), hl
 	ld	hl, (ix + 12)
 	or	a, a
-	sbc	hl, de
+	sbc	hl, bc
 	ld	(ix - 95), hl
-	ld	(ix - 83), iy
+	push	de
+	pop	iy
+	ld	de, 15
+	ld	b, (ix + 33)
 	.local	.LBB2_14
 .LBB2_14:                               ; =>This Inner Loop Header: Depth=1
-	ld	hl, (ix - 83)
-	ld	de, 14
+	lea	hl, iy + 0
 	or	a, a
 	sbc	hl, de
 	jp	z, .LBB2_28
 ; %bb.15:                               ;   in Loop: Header=BB2_14 Depth=1
 	ld	hl, (ix + 15)
-	ld	de, (ix - 83)
+	lea	de, iy + 0
+	ld	(ix - 92), de
 	add	hl, de
 	ld	(ix - 98), hl
 	ld	hl, (ix + 9)
 	push	hl
-	ld	hl, (ix - 89)
+	ld	hl, (ix - 86)
 	push	hl
 	call	__ZN7tinystl13unordered_mapIjhNS_9allocatorEEC2ERKS2_
 	pop	hl
 	pop	hl
-	ld	hl, (ix - 89)
+	ld	hl, (ix - 86)
 	push	hl
 	ld	hl, (ix - 98)
 	push	hl
@@ -345,51 +357,52 @@ __Z12render_leveljN7tinystl13unordered_mapIjhNS_9allocatorEEEjjbbbhhh: ; @_Z12re
 	pop	hl
 	pop	hl
 	pop	hl
-	ld	hl, (ix - 92)
-	ld	de, (ix - 83)
+	ld	hl, (ix - 89)
+	ld	de, (ix - 92)
 	add	hl, de
 	ld	(hl), a
-	ld	hl, (ix - 89)
+	ld	hl, (ix - 86)
 	push	hl
 	call	__ZN7tinystl13unordered_mapIjhNS_9allocatorEED2Ev
 	ld	b, (ix + 33)
-	ld	iy, 0
 	pop	hl
-	ld	hl, (ix - 83)
-	inc	hl
-	ld	(ix - 83), hl
+	ld	iy, (ix - 92)
+	inc	iy
+	ld	de, 15
 	jr	.LBB2_14
 	.local	.LBB2_16
 .LBB2_16:
-	ld	(ix - 95), hl
-	lea	hl, ix - 56
 	ld	(ix - 92), hl
+	lea	hl, ix - 56
+	ld	(ix - 89), hl
 	ld	hl, (ix + 15)
-	add	hl, de
-	ld	de, 15
-	add	hl, de
+	add	hl, bc
+	ld	bc, 14
+	add	hl, bc
 	ld	(ix - 98), hl
-	ld	(ix - 83), iy
+	ld	bc, 20
+	push	de
+	pop	iy
 	.local	.LBB2_17
 .LBB2_17:                               ; =>This Inner Loop Header: Depth=1
-	ld	hl, (ix - 83)
-	ld	de, 20
+	lea	hl, iy + 0
 	or	a, a
-	sbc	hl, de
+	sbc	hl, bc
 	jp	z, .LBB2_34
 ; %bb.18:                               ;   in Loop: Header=BB2_17 Depth=1
 	ld	hl, (ix + 12)
-	ld	de, (ix - 83)
+	lea	de, iy + 0
+	ld	(ix - 95), de
 	add	hl, de
 	ld	(ix - 101), hl
 	ld	hl, (ix + 9)
 	push	hl
-	ld	hl, (ix - 92)
+	ld	hl, (ix - 89)
 	push	hl
 	call	__ZN7tinystl13unordered_mapIjhNS_9allocatorEEC2ERKS2_
 	pop	hl
 	pop	hl
-	ld	hl, (ix - 92)
+	ld	hl, (ix - 89)
 	push	hl
 	ld	hl, (ix - 98)
 	push	hl
@@ -401,70 +414,72 @@ __Z12render_leveljN7tinystl13unordered_mapIjhNS_9allocatorEEEjjbbbhhh: ; @_Z12re
 	pop	hl
 	pop	hl
 	pop	hl
-	ld	hl, (ix - 95)
-	ld	de, (ix - 83)
+	ld	hl, (ix - 92)
+	ld	de, (ix - 95)
 	add	hl, de
 	ld	(hl), a
-	ld	hl, (ix - 92)
+	ld	hl, (ix - 89)
 	push	hl
 	call	__ZN7tinystl13unordered_mapIjhNS_9allocatorEED2Ev
-	ld	c, (ix - 86)
-	ld	b, (ix - 85)
-	ld	iy, 0
+	ld	de, 0
 	pop	hl
-	ld	hl, (ix - 83)
-	inc	hl
-	ld	(ix - 83), hl
+	ld	iy, (ix - 95)
+	inc	iy
+	ld	bc, 20
 	jr	.LBB2_17
 	.local	.LBB2_19
 .LBB2_19:
-	ld	e, c
-	ld	d, b
-	mlt	de
+	ex	de, hl
+	ld	e, iyl
+	ld	d, iyh
+	ex	de, hl
+	mlt	hl
 	ld	a, -16
-	ld	(ix - 83), de
-	sub	a, e
+	ld	(ix - 89), hl
+	sub	a, l
 	ld	l, a
-	ld	(ix - 92), hl
-	ld	c, b
+	ld	(ix - 95), hl
+	ld	a, iyh
 	.local	.LBB2_20
 .LBB2_20:                               ; =>This Loop Header: Depth=1
                                         ;     Child Loop BB2_22 Depth 2
-	ld	a, c
+	ld	de, 0
 	cp	a, 17
-	ld	de, 240
+	ld	hl, 1
+	push	hl
+	pop	iy
+	ld	bc, 240
 	jp	nc, .LBB2_46
 ; %bb.21:                               ;   in Loop: Header=BB2_20 Depth=1
 	or	a, a
 	sbc	hl, hl
-	ld	(ix - 98), c                    ; 1-byte Folded Spill
-	ld	l, c
+	ld	(ix - 98), a                    ; 1-byte Folded Spill
+	ld	l, a
 	ld	(ix - 101), hl
-	ld	bc, (ix - 92)
-	push	bc
-	push	de
-	ld	bc, (ix - 83)
-	push	bc
-	push	iy
-	ld	bc, 0
-	push	bc
-	push	iy
-	ld	hl, 1
+	ld	hl, (ix - 95)
 	push	hl
+	push	bc
+	ld	hl, (ix - 89)
+	push	hl
+	push	de
+	sbc	hl, hl
+	push	hl
+	push	de
 	push	iy
+	push	de
 	call	_gfx_CopyRectangle
 	ld	hl, 24
 	add	hl, sp
 	ld	sp, hl
 	ld	hl, (ix - 101)
-	ld	bc, (ix - 89)
+	ld	bc, (ix - 86)
 	call	__imulu
 	ld	de, -16
 	add	hl, de
 	ld	de, 240
 	ld	(ix - 101), hl
 	ld	iy, 0
-	ld	bc, (ix - 95)
+	ld	bc, (ix - 92)
 	.local	.LBB2_22
 .LBB2_22:                               ;   Parent Loop BB2_20 Depth=1
                                         ; =>  This Inner Loop Header: Depth=2
@@ -506,47 +521,45 @@ __Z12render_leveljN7tinystl13unordered_mapIjhNS_9allocatorEEEjjbbbhhh: ; @_Z12re
 	.local	.LBB2_24
 .LBB2_24:                               ;   in Loop: Header=BB2_20 Depth=1
 	call	_gfx_SwapDraw
-	ld	l, (ix - 86)
-	ld	h, (ix - 85)
-	ld	c, (ix - 98)                    ; 1-byte Folded Reload
-	ld	a, c
+	ld	l, (ix - 83)
+	ld	h, (ix - 82)
+	ld	e, (ix - 98)                    ; 1-byte Folded Reload
+	ld	a, e
 	add	a, h
-	ld	c, a
-	ld	iy, 0
+	ld	e, a
 	jp	.LBB2_20
 	.local	.LBB2_25
 .LBB2_25:
-	ld	bc, 19
-	lea	hl, ix - 32
 	ld	(ix - 89), hl
 	lea	hl, ix - 80
-	ld	(ix - 83), hl
+	ld	(ix - 86), hl
 	ld	hl, (ix + 12)
-	add	hl, de
+	add	hl, bc
+	ld	bc, 14
 	add	hl, bc
 	ld	(ix - 95), hl
-	ld	de, 14
-	lea	bc, iy + 0
+	push	de
+	pop	iy
 	.local	.LBB2_26
 .LBB2_26:                               ; =>This Inner Loop Header: Depth=1
-	push	bc
-	pop	hl
+	lea	hl, iy + 0
 	or	a, a
-	sbc	hl, de
+	sbc	hl, bc
 	jp	z, .LBB2_40
 ; %bb.27:                               ;   in Loop: Header=BB2_26 Depth=1
 	ld	hl, (ix + 15)
-	add	hl, bc
+	lea	de, iy + 0
+	ld	(ix - 92), de
+	add	hl, de
 	ld	(ix - 98), hl
 	ld	hl, (ix + 9)
 	push	hl
-	ld	hl, (ix - 83)
+	ld	hl, (ix - 86)
 	push	hl
-	ld	(ix - 92), bc
 	call	__ZN7tinystl13unordered_mapIjhNS_9allocatorEEC2ERKS2_
 	pop	hl
 	pop	hl
-	ld	hl, (ix - 83)
+	ld	hl, (ix - 86)
 	push	hl
 	ld	hl, (ix - 98)
 	push	hl
@@ -562,71 +575,77 @@ __Z12render_leveljN7tinystl13unordered_mapIjhNS_9allocatorEEEjjbbbhhh: ; @_Z12re
 	ld	de, (ix - 92)
 	add	hl, de
 	ld	(hl), a
-	ld	hl, (ix - 83)
+	ld	hl, (ix - 86)
 	push	hl
 	call	__ZN7tinystl13unordered_mapIjhNS_9allocatorEED2Ev
-	ld	bc, (ix - 92)
-	ld	iy, 0
-	ld	de, 14
+	ld	de, 0
 	pop	hl
-	inc	bc
+	ld	iy, (ix - 92)
+	inc	iy
+	ld	bc, 14
 	jr	.LBB2_26
 	.local	.LBB2_28
 .LBB2_28:
 	or	a, a
 	sbc	hl, hl
 	ld	l, b
-	ld	bc, (ix - 86)
+	ld	bc, (ix - 83)
 	call	__imulu
 	ex	de, hl
-	ld	hl, 320
-	ld	(ix - 83), de
+	ld	bc, 240
+	push	bc
+	pop	hl
+	ld	(ix - 86), de
 	or	a, a
 	sbc	hl, de
-	ld	(ix - 89), hl
+	ld	(ix - 92), hl
 	ld	h, (ix + 33)
-	ld	c, h
+	ld	a, h
+	ld	de, 0
 	.local	.LBB2_29
 .LBB2_29:                               ; =>This Loop Header: Depth=1
                                         ;     Child Loop BB2_31 Depth 2
-	ld	a, c
 	cp	a, 17
 	ld	hl, 1
+	push	hl
+	pop	iy
 	jp	nc, .LBB2_46
 ; %bb.30:                               ;   in Loop: Header=BB2_29 Depth=1
-	ld	de, 0
-	ld	(ix - 95), c                    ; 1-byte Folded Spill
-	ld	e, c
-	ld	(ix - 98), de
-	ld	de, 216
-	push	de
-	ld	de, (ix - 89)
-	push	de
-	ld	bc, 0
+	or	a, a
+	sbc	hl, hl
+	ld	(ix - 95), a                    ; 1-byte Folded Spill
+	ld	l, a
+	ld	(ix - 98), hl
 	push	bc
-	ld	de, (ix - 83)
-	push	de
-	push	bc
-	push	iy
+	ld	hl, (ix - 92)
 	push	hl
+	sbc	hl, hl
+	push	hl
+	pop	bc
+	push	bc
+	ld	hl, (ix - 86)
+	push	hl
+	push	bc
+	push	de
 	push	iy
+	push	de
 	call	_gfx_CopyRectangle
 	ld	hl, 24
 	add	hl, sp
 	ld	sp, hl
 	ld	hl, (ix - 98)
-	ld	bc, (ix - 86)
+	ld	bc, (ix - 83)
 	call	__imulu
 	ld	de, -16
 	add	hl, de
+	ld	de, 240
 	ld	(ix - 98), hl
 	ld	iy, 0
-	ld	bc, (ix - 92)
+	ld	bc, (ix - 89)
 	.local	.LBB2_31
 .LBB2_31:                               ;   Parent Loop BB2_29 Depth=1
                                         ; =>  This Inner Loop Header: Depth=2
 	lea	hl, iy + 0
-	ld	de, 224
 	or	a, a
 	sbc	hl, de
 	jr	z, .LBB2_33
@@ -658,59 +677,65 @@ __Z12render_leveljN7tinystl13unordered_mapIjhNS_9allocatorEEEjjbbbhhh: ; @_Z12re
 	inc	bc
 	ld	de, 16
 	add	iy, de
+	ld	hl, 240
+	ex	de, hl
 	jr	.LBB2_31
 	.local	.LBB2_33
 .LBB2_33:                               ;   in Loop: Header=BB2_29 Depth=1
 	call	_gfx_SwapDraw
 	ld	h, (ix + 33)
-	ld	c, (ix - 95)                    ; 1-byte Folded Reload
-	ld	a, c
+	ld	e, (ix - 95)                    ; 1-byte Folded Reload
+	ld	a, e
 	add	a, h
-	ld	c, a
-	ld	iy, 0
+	ld	e, a
+	ld	de, 0
+	ld	bc, 240
 	jp	.LBB2_29
 	.local	.LBB2_34
 .LBB2_34:
-	ld	e, c
-	ld	d, b
-	mlt	de
+	ld	c, (ix - 83)
+	ld	b, (ix - 82)
+	ld	l, c
+	ld	h, b
+	mlt	hl
 	ld	a, -16
-	ld	(ix - 92), de
-	sub	a, e
+	ld	(ix - 95), hl
+	sub	a, l
 	ld	l, a
 	ld	(ix - 98), hl
-	ld	c, b
+	ld	a, b
 	.local	.LBB2_35
 .LBB2_35:                               ; =>This Loop Header: Depth=1
                                         ;     Child Loop BB2_37 Depth 2
-	ld	a, c
 	cp	a, 17
-	ld	de, 240
+	ld	hl, 1
+	push	hl
+	pop	iy
+	ld	bc, 240
 	jp	nc, .LBB2_46
 ; %bb.36:                               ;   in Loop: Header=BB2_35 Depth=1
 	or	a, a
 	sbc	hl, hl
-	ld	(ix - 101), c                   ; 1-byte Folded Spill
-	ld	l, c
-	ld	(ix - 83), hl
-	ld	bc, (ix - 98)
+	ld	(ix - 101), a                   ; 1-byte Folded Spill
+	ld	l, a
+	ld	(ix - 89), hl
+	ld	hl, (ix - 98)
+	push	hl
+	push	bc
+	ld	bc, 0
 	push	bc
 	push	de
-	ld	de, 0
+	ld	bc, (ix - 95)
+	push	bc
 	push	de
 	push	iy
-	ld	de, (ix - 92)
 	push	de
-	push	iy
-	ld	hl, 1
-	push	hl
-	push	iy
 	call	_gfx_CopyRectangle
 	ld	hl, 24
 	add	hl, sp
 	ld	sp, hl
-	ld	hl, (ix - 83)
-	ld	bc, (ix - 89)
+	ld	hl, (ix - 89)
+	ld	bc, (ix - 86)
 	call	__imulu
 	ld	bc, 240
 	ex	de, hl
@@ -720,8 +745,8 @@ __Z12render_leveljN7tinystl13unordered_mapIjhNS_9allocatorEEEjjbbbhhh: ; @_Z12re
 	sbc	hl, de
 	ld	(ix - 104), hl
 	ld	iy, 0
-	ld	hl, (ix - 95)
-	ld	(ix - 83), hl
+	ld	hl, (ix - 92)
+	ld	(ix - 89), hl
 	.local	.LBB2_37
 .LBB2_37:                               ;   Parent Loop BB2_35 Depth=1
                                         ; =>  This Inner Loop Header: Depth=2
@@ -730,7 +755,7 @@ __Z12render_leveljN7tinystl13unordered_mapIjhNS_9allocatorEEEjjbbbhhh: ; @_Z12re
 	sbc	hl, bc
 	jr	z, .LBB2_39
 ; %bb.38:                               ;   in Loop: Header=BB2_37 Depth=2
-	ld	hl, (ix - 83)
+	ld	hl, (ix - 89)
 	ld	a, (hl)
 	or	a, a
 	sbc	hl, hl
@@ -751,9 +776,9 @@ __Z12render_leveljN7tinystl13unordered_mapIjhNS_9allocatorEEEjjbbbhhh: ; @_Z12re
 	pop	hl
 	pop	hl
 	pop	hl
-	ld	hl, (ix - 83)
+	ld	hl, (ix - 89)
 	inc	hl
-	ld	(ix - 83), hl
+	ld	(ix - 89), hl
 	ld	de, 16
 	add	iy, de
 	ld	bc, 240
@@ -761,82 +786,92 @@ __Z12render_leveljN7tinystl13unordered_mapIjhNS_9allocatorEEEjjbbbhhh: ; @_Z12re
 	.local	.LBB2_39
 .LBB2_39:                               ;   in Loop: Header=BB2_35 Depth=1
 	call	_gfx_SwapDraw
-	ld	l, (ix - 86)
-	ld	h, (ix - 85)
-	ld	c, (ix - 101)                   ; 1-byte Folded Reload
-	ld	a, c
+	ld	l, (ix - 83)
+	ld	h, (ix - 82)
+	ld	e, (ix - 101)                   ; 1-byte Folded Reload
+	ld	a, e
 	add	a, h
-	ld	c, a
-	ld	iy, 0
+	ld	e, a
+	ld	de, 0
 	jp	.LBB2_35
 	.local	.LBB2_40
 .LBB2_40:
 	or	a, a
 	sbc	hl, hl
 	ld	b, (ix + 33)
-	ld	e, c
-	ld	d, b
-	ld	l, d
-	ld	bc, (ix - 86)
+	ld	l, b
+	ld	bc, (ix - 83)
 	call	__imulu
 	push	hl
-	pop	bc
-	ld	hl, 320
-	ld	(ix - 83), bc
+	pop	iy
+	ld	bc, 240
+	push	bc
+	pop	hl
+	lea	bc, iy + 0
+	ld	(ix - 92), bc
 	or	a, a
 	sbc	hl, bc
-	ld	(ix - 92), hl
-	ld	c, d
+	ld	bc, 240
+	ld	(ix - 95), hl
+	ld	h, (ix + 33)
+	ex	de, hl
+	ld	iyl, d
+	ex	de, hl
 	.local	.LBB2_41
 .LBB2_41:                               ; =>This Loop Header: Depth=1
                                         ;     Child Loop BB2_43 Depth 2
-	ld	a, c
+	ld	a, iyl
 	cp	a, 17
-	ld	hl, 1
 	jp	nc, .LBB2_46
 ; %bb.42:                               ;   in Loop: Header=BB2_41 Depth=1
-	ld	de, 0
-	ld	(ix - 95), c                    ; 1-byte Folded Spill
-	ld	e, c
-	ld	(ix - 98), de
-	ld	de, 216
-	push	de
-	ld	de, (ix - 92)
-	push	de
+	or	a, a
+	sbc	hl, hl
+	push	af
+	ld	a, iyl
+	ld	(ix - 98), a                    ; 1-byte Folded Spill
+	pop	af
+	ex	de, hl
+	ld	e, iyl
+	ex	de, hl
+	ld	(ix - 86), hl
+	push	bc
+	ld	bc, (ix - 95)
+	push	bc
 	ld	bc, 0
 	push	bc
-	push	iy
-	push	bc
-	ld	de, (ix - 83)
 	push	de
+	push	bc
+	ld	bc, (ix - 92)
+	push	bc
+	ld	hl, 1
 	push	hl
-	push	iy
+	push	de
 	call	_gfx_CopyRectangle
 	ld	hl, 24
 	add	hl, sp
 	ld	sp, hl
-	ld	hl, (ix - 98)
-	ld	bc, (ix - 86)
+	ld	hl, (ix - 86)
+	ld	bc, (ix - 83)
 	call	__imulu
+	ld	bc, 240
 	ex	de, hl
-	ld	hl, 320
+	push	bc
+	pop	hl
 	or	a, a
 	sbc	hl, de
-	ld	(ix - 98), hl
+	ld	(ix - 101), hl
 	ld	iy, 0
-	ld	bc, (ix - 89)
+	ld	hl, (ix - 89)
+	ld	(ix - 86), hl
 	.local	.LBB2_43
 .LBB2_43:                               ;   Parent Loop BB2_41 Depth=1
                                         ; =>  This Inner Loop Header: Depth=2
 	lea	hl, iy + 0
-	ld	de, 224
 	or	a, a
-	sbc	hl, de
+	sbc	hl, bc
 	jr	z, .LBB2_45
 ; %bb.44:                               ;   in Loop: Header=BB2_43 Depth=2
-	push	bc
-	pop	hl
-	ld	(ix - 104), hl
+	ld	hl, (ix - 86)
 	ld	a, (hl)
 	or	a, a
 	sbc	hl, hl
@@ -848,29 +883,35 @@ __Z12render_leveljN7tinystl13unordered_mapIjhNS_9allocatorEEEjjbbbhhh: ; @_Z12re
 	add	hl, de
 	ld	hl, (hl)
 	push	iy
-	ld	de, (ix - 98)
+	ld	de, (ix - 101)
 	push	de
 	push	hl
-	ld	(ix - 101), iy
+	ld	(ix - 104), iy
 	call	_gfx_Sprite
-	ld	iy, (ix - 101)
+	ld	iy, (ix - 104)
 	pop	hl
 	pop	hl
 	pop	hl
-	ld	bc, (ix - 104)
-	inc	bc
+	ld	hl, (ix - 86)
+	inc	hl
+	ld	(ix - 86), hl
 	ld	de, 16
 	add	iy, de
+	ld	bc, 240
 	jr	.LBB2_43
 	.local	.LBB2_45
 .LBB2_45:                               ;   in Loop: Header=BB2_41 Depth=1
 	call	_gfx_SwapDraw
 	ld	h, (ix + 33)
-	ld	c, (ix - 95)                    ; 1-byte Folded Reload
-	ld	a, c
+	push	af
+	ld	a, (ix - 98)                    ; 1-byte Folded Reload
+	ld	iyl, a
+	pop	af
+	ld	a, iyl
 	add	a, h
-	ld	c, a
-	ld	iy, 0
+	ld	iyl, a
+	ld	de, 0
+	ld	bc, 240
 	jp	.LBB2_41
 	.local	.LBB2_46
 .LBB2_46:                               ; %.loopexit
@@ -1729,10 +1770,9 @@ __Z4gamev:                              ; @_Z4gamev
 	push	hl
 	call	__ZN7tinystl13unordered_mapIjhNS_9allocatorEED2Ev
 	pop	hl
-	ld	hl, 96
+	ld	hl, 104
 	push	hl
-	or	a, a
-	sbc	hl, hl
+	ld	hl, 240
 	push	hl
 	ld	hl, _.str.1
 	push	hl
@@ -1740,35 +1780,9 @@ __Z4gamev:                              ; @_Z4gamev
 	pop	hl
 	pop	hl
 	pop	hl
-	ld	hl, 96
-	push	hl
-	ld	hl, 48
-	push	hl
-	call	_gfx_SetTextXY
-	pop	hl
-	pop	hl
-	ld	hl, 3
-	push	hl
-	or	a, a
-	sbc	hl, hl
-	push	hl
-	call	_gfx_PrintUInt
-	pop	hl
-	pop	hl
 	ld	hl, 104
 	push	hl
-	or	a, a
-	sbc	hl, hl
-	push	hl
-	ld	hl, _.str.1.2
-	push	hl
-	call	_gfx_PrintStringXY
-	pop	hl
-	pop	hl
-	pop	hl
-	ld	hl, 104
-	push	hl
-	ld	hl, 16
+	ld	hl, 256
 	push	hl
 	call	_gfx_SetTextXY
 	pop	hl
@@ -1782,10 +1796,9 @@ __Z4gamev:                              ; @_Z4gamev
 	pop	hl
 	ld	hl, 112
 	push	hl
-	or	a, a
-	sbc	hl, hl
+	ld	hl, 240
 	push	hl
-	ld	hl, _.str.2
+	ld	hl, _.str.1.2
 	push	hl
 	call	_gfx_PrintStringXY
 	pop	hl
@@ -1793,7 +1806,7 @@ __Z4gamev:                              ; @_Z4gamev
 	pop	hl
 	ld	hl, 112
 	push	hl
-	ld	hl, 16
+	ld	hl, 256
 	push	hl
 	call	_gfx_SetTextXY
 	pop	hl
@@ -2239,6 +2252,18 @@ __Z4gamev:                              ; @_Z4gamev
 	push	hl
 	call	_gfx_SetDraw
 	pop	hl
+	ld	hl, 240
+	push	hl
+	push	hl
+	or	a, a
+	sbc	hl, hl
+	push	hl
+	push	hl
+	call	_gfx_SetClipRegion
+	pop	hl
+	pop	hl
+	pop	hl
+	pop	hl
 	ld	hl, (_seed)
 	ld	(ix - 109), hl
 	ld	hl, (ix - 79)
@@ -2319,7 +2344,7 @@ __Z4gamev:                              ; @_Z4gamev
 	pop	hl
 	ld	hl, 104
 	push	hl
-	ld	hl, 16
+	ld	hl, 256
 	push	hl
 	call	_gfx_SetTextXY
 	pop	hl
@@ -2333,7 +2358,7 @@ __Z4gamev:                              ; @_Z4gamev
 	pop	hl
 	ld	hl, 112
 	push	hl
-	ld	hl, 16
+	ld	hl, 256
 	push	hl
 	call	_gfx_SetTextXY
 	pop	hl
@@ -4028,7 +4053,7 @@ __Z9writeSavejjjRhN7tinystl13unordered_mapIjhNS0_9allocatorEEE: ; @_Z9writeSavej
 	pop	hl
 	pop	hl
 	call	_gfx_SwapDraw
-	ld	hl, _.str.2.12
+	ld	hl, _.str.2
 	push	hl
 	ld	hl, _.str.1.11
 	push	hl
@@ -4218,7 +4243,7 @@ __Z8readSaveRjS_S_RhRN7tinystl13unordered_mapIjhNS1_9allocatorEEE: ; @_Z8readSav
 	push	de
 	pop	iy
 	ld	(iy), hl
-	ld	hl, _.str.2.12
+	ld	hl, _.str.2
 	push	hl
 	ld	hl, _.str.1.11
 	push	hl
@@ -5442,7 +5467,7 @@ __Z4tickRN7tinystl13unordered_mapIjhNS_9allocatorEEES3_jj: ; @_Z4tickRN7tinystl1
 	add	hl, hl
 	add	hl, hl
 	ld	(ix - 68), hl
-	ld	hl, 14
+	ld	hl, 15
 	ex	de, hl
 	xor	a, a
 	ld	l, a
@@ -6009,6 +6034,12 @@ _gameTiles_tile_31_data:
 _.str:
 	.asciz	"Loading"
 
+	.section	.bss._tilemap_buffer,"aw",@nobits
+	.balign	1
+	.globl	_tilemap_buffer
+_tilemap_buffer:
+	.zero	16384
+
 	.section	.bss._seed,"aw",@nobits
 	.balign	1
 	.globl	_seed
@@ -6037,18 +6068,12 @@ _game8:
 	.balign	1
 	.local	_.str.1
 _.str.1:
-	.asciz	"Tasks:"
+	.asciz	"x:"
 
 	.section	.rodata._.str.1.2,"a",@progbits
 	.balign	1
 	.local	_.str.1.2
 _.str.1.2:
-	.asciz	"x:"
-
-	.section	.rodata._.str.2,"a",@progbits
-	.balign	1
-	.local	_.str.2
-_.str.2:
 	.asciz	"y:"
 
 	.section	.data._cursor_data,"aw",@progbits
@@ -6081,10 +6106,10 @@ _.str.10:
 _.str.1.11:
 	.asciz	"PGSV"
 
-	.section	.rodata._.str.2.12,"a",@progbits
+	.section	.rodata._.str.2,"a",@progbits
 	.balign	1
-	.local	_.str.2.12
-_.str.2.12:
+	.local	_.str.2
+_.str.2:
 	.asciz	"w+"
 
 	.section	.rodata._.str.3,"a",@progbits
@@ -6197,6 +6222,7 @@ _gameTiles_tiles_data:
 	.extern	_ti_Close
 	.extern	_llvm.lifetime.start.p0
 	.extern	_gfx_ZeroScreen
+	.extern	_gfx_SetClipRegion
 	.extern	__frameset0
 	.extern	_gfx_PrintUInt
 	.extern	__Unwind_SjLj_Register

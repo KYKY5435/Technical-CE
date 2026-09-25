@@ -42,4 +42,4 @@ obj/src/game.cpp.bc: src\game.cpp \
   src\TINYSTL\stddef.h src\TINYSTL\buffer.h src\TINYSTL\new.h \
   src\TINYSTL\traits.h src\TINYSTL\hash.h src\TINYSTL\hash_base.h \
   src\draw.h src\tick.h src\random.h src\perlin.h src\gfx\gfx.h \
-  src\gfx\game8.h src\gfx\gameTiles.h src\gfx\cursor.h
+  src\gfx\game8.h src\gfx\gameTiles.h src\gfx\cursor.h src\game.h

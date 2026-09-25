@@ -189,7 +189,7 @@ void tick(tinystl::unordered_map<uint24_t, uint8_t> &tick_tiles, tinystl::unorde
             }
             for (uint8_t i = 0; i < BASE_X / TILE_SIZE; i++)
             {
-                for (uint8_t j = 0; j < BASE_Y / TILE_SIZE - 1; j++)
+                for (uint8_t j = 0; j < BASE_Y / TILE_SIZE; j++)
                 {
                     if (tile_val == (i + top_corner_x) * 0x2f6e3bu + (j + top_corner_y) * 0x27d4ebu)
                     {

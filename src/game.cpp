@@ -17,12 +17,16 @@
 
 #include "gfx/gfx.h"
 
+#include "game.h"
+
 #define NUMBER_OF_TILES 16
 #define TILE_SIZE 16
 
 void init();
 void game();
 void tile_selection_menu(uint8_t &current_selection, const tinystl::unordered_map<uint24_t, uint8_t> modified_tiles, uint24_t x, uint24_t y);
+
+uint8_t tilemap_buffer[128][128] = {};
 
 uint24_t seed = 0;
 uint24_t x = 0, y = 0;
@@ -82,14 +86,14 @@ void game()
 
     render_level(seed, modified_tiles, x, y, true);
 
-    gfx_PrintStringXY("Tasks:", 0, 96);
-    gfx_SetTextXY(48, 96);
-    gfx_PrintUInt(0u, 3);
-    gfx_PrintStringXY("x:", 0, 104);
-    gfx_SetTextXY(16, 104);
+    //gfx_PrintStringXY("Tasks:", 0, 96);
+    //gfx_SetTextXY(48, 96);
+    //gfx_PrintUInt(0u, 3);
+    gfx_PrintStringXY("x:", BASE_X - 5 * TILE_SIZE, 104);
+    gfx_SetTextXY(BASE_X - 5 * TILE_SIZE + 16, 104);
     gfx_PrintUInt(x, 8);
-    gfx_PrintStringXY("y:", 0, 112);
-    gfx_SetTextXY(16, 112);
+    gfx_PrintStringXY("y:", BASE_X - 5 * TILE_SIZE, 112);
+    gfx_SetTextXY(BASE_X - 5 * TILE_SIZE + 16, 112);
     gfx_PrintUInt(y, 8);
 
     gfx_GetSprite_NoClip(curser_bg, 64, 32);
@@ -176,16 +180,16 @@ void game()
                 gfx_Sprite_NoClip(curser_bg, 64, 32);
                 gfx_SetDrawBuffer();
 
-                //gfx_SetClipRegion(0, 0, BASE_X, BASE_Y - 3 * TILE_SIZE / 2);
+                gfx_SetClipRegion(0, 0, BASE_X - 5 * TILE_SIZE, BASE_Y);
                 render_level(seed, modified_tiles, x, y, false, generateHorizontal, generateTopLeft, cx, cy, 2);
                 x += (generateTopLeft) ? -cx : cx;
                 y += (generateTopLeft) ? -cy : cy;
                 generate = false;
 
                 gfx_SetDrawScreen();
-                gfx_SetTextXY(16, 104);
+                gfx_SetTextXY(BASE_X - 5 * TILE_SIZE + 16, 104);
                 gfx_PrintUInt(x, 8);
-                gfx_SetTextXY(16, 112);
+                gfx_SetTextXY(BASE_X - 5 * TILE_SIZE + 16, 112);
                 gfx_PrintUInt(y, 8);
 
                 gfx_GetSprite_NoClip(curser_bg, 64, 32);
