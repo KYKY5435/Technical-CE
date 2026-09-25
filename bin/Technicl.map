@@ -91,7 +91,7 @@ Linker script and memory map
                 0x00d1a9c6                ___exithl
                 0x00d1a9c7                _exit.sp
 
-.text           0x00d1aa02     0x2f5f
+.text           0x00d1aa02     0x2d17
  *(.text.unlikely .text.*_unlikely .text.unlikely.*)
  *(.text.exit .text.exit.*)
  *(.text.startup .text.startup.*)
@@ -135,259 +135,260 @@ Linker script and memory map
                 0x00d1abc1                __lmulu
                 0x00d1abc1                __lmuls
                 0x00d1ac1d                _atomic_load_increasing_32
- .text.__Z12render_leveljN7tinystl13unordered_mapIjhNS_9allocatorEEEjjbbbhhh
-                0x00d1ac42      0x668 obj/Technicl.o
-                0x00d1ac42                __Z12render_leveljN7tinystl13unordered_mapIjhNS_9allocatorEEEjjbbbhhh
- .text.__ZN7tinystl13unordered_mapIjhNS_9allocatorEEC2ERKS2_
-                0x00d1b2aa      0x1b7 obj/Technicl.o
-                0x00d1b2aa                __ZN7tinystl13unordered_mapIjhNS_9allocatorEEC2ERKS2_
- .text.__ZN7tinystl13unordered_mapIjhNS_9allocatorEED2Ev
-                0x00d1b461       0x32 obj/Technicl.o
-                0x00d1b461                __ZN7tinystl13unordered_mapIjhNS_9allocatorEED2Ev
- .text.__ZN7tinystl13unordered_mapIjhNS_9allocatorEE5clearEv
-                0x00d1b493       0x5d obj/Technicl.o
-                0x00d1b493                __ZN7tinystl13unordered_mapIjhNS_9allocatorEE5clearEv
- .text.__ZN7tinystlL13buffer_resizeIPNS_19unordered_hash_nodeIjhEENS_9allocatorEEEvPNS_6bufferIT_T0_EEjRKS6_
-                0x00d1b4f0      0x120 obj/Technicl.o
- .text.__ZN7tinystl4hashIjEEjRKT_
-                0x00d1b610       0x5b obj/Technicl.o
-                0x00d1b610                __ZN7tinystl4hashIjEEjRKT_
+ .text.__Z12render_leveljRN7tinystl13unordered_mapIjhNS_9allocatorEEEjjbbbhhh
+                0x00d1ac42      0x5c5 obj/Technicl.o
+                0x00d1ac42                __Z12render_leveljRN7tinystl13unordered_mapIjhNS_9allocatorEEEjjbbbhhh
  .text.__Z26render_tile_selection_menuhPhh
-                0x00d1b66b      0x11e obj/Technicl.o
-                0x00d1b66b                __Z26render_tile_selection_menuhPhh
+                0x00d1b207      0x11e obj/Technicl.o
+                0x00d1b207                __Z26render_tile_selection_menuhPhh
  .text.__Z4initv
-                0x00d1b789       0x49 obj/Technicl.o
-                0x00d1b789                __Z4initv
+                0x00d1b325       0x49 obj/Technicl.o
+                0x00d1b325                __Z4initv
  .text.__Z4gamev
-                0x00d1b7d2      0x69e obj/Technicl.o
-                0x00d1b7d2                __Z4gamev
+                0x00d1b36e      0x675 obj/Technicl.o
+                0x00d1b36e                __Z4gamev
  .text.__ZN7tinystl13unordered_mapIjhNS_9allocatorEEixERKj
-                0x00d1be70       0x30 obj/Technicl.o
-                0x00d1be70                __ZN7tinystl13unordered_mapIjhNS_9allocatorEEixERKj
+                0x00d1b9e3       0x30 obj/Technicl.o
+                0x00d1b9e3                __ZN7tinystl13unordered_mapIjhNS_9allocatorEEixERKj
+ .text.__ZN7tinystl13unordered_mapIjhNS_9allocatorEEC2ERKS2_
+                0x00d1ba13       0xce obj/Technicl.o
+                0x00d1ba13                __ZN7tinystl13unordered_mapIjhNS_9allocatorEEC2ERKS2_
  .text.__Z19tile_selection_menuRhN7tinystl13unordered_mapIjhNS0_9allocatorEEEjj
-                0x00d1bea0      0x286 obj/Technicl.o
-                0x00d1bea0                __Z19tile_selection_menuRhN7tinystl13unordered_mapIjhNS0_9allocatorEEEjj
- .text.__ZN7tinystl13unordered_mapIjhNS_9allocatorEE6insertERKNS_4pairIjhEE
-                0x00d1c126       0xf2 obj/Technicl.o
-                0x00d1c126                __ZN7tinystl13unordered_mapIjhNS_9allocatorEE6insertERKNS_4pairIjhEE
- .text.__ZN7tinystl13unordered_mapIjhNS_9allocatorEE4findERKj
-                0x00d1c218       0x86 obj/Technicl.o
-                0x00d1c218                __ZN7tinystl13unordered_mapIjhNS_9allocatorEE4findERKj
- .text.__ZN7tinystlL13buffer_resizeIPNS_19unordered_hash_nodeIjhEENS_9allocatorEEEvPNS_6bufferIT_T0_EEjRKS6_.3
-                0x00d1c29e      0x120 obj/Technicl.o
+                0x00d1bae1      0x286 obj/Technicl.o
+                0x00d1bae1                __Z19tile_selection_menuRhN7tinystl13unordered_mapIjhNS0_9allocatorEEEjj
+ .text.__ZN7tinystl13unordered_mapIjhNS_9allocatorEED2Ev
+                0x00d1bd67       0x32 obj/Technicl.o
+                0x00d1bd67                __ZN7tinystl13unordered_mapIjhNS_9allocatorEED2Ev
+ .text.__ZN7tinystl13unordered_mapIjhNS_9allocatorEE5clearEv
+                0x00d1bd99       0x5d obj/Technicl.o
+                0x00d1bd99                __ZN7tinystl13unordered_mapIjhNS_9allocatorEE5clearEv
+ .text.__ZN7tinystlL13buffer_resizeIPNS_19unordered_hash_nodeIjhEENS_9allocatorEEEvPNS_6bufferIT_T0_EEjRKS6_
+                0x00d1bdf6      0x120 obj/Technicl.o
+ .text.__ZN7tinystl4hashIjEEjRKT_
+                0x00d1bf16       0x5b obj/Technicl.o
+                0x00d1bf16                __ZN7tinystl4hashIjEEjRKT_
  .text.__ZN7tinystlL26unordered_hash_node_insertIjhEEvPNS_19unordered_hash_nodeIT_T0_EEjPS5_j
-                0x00d1c3be      0x11b obj/Technicl.o
+                0x00d1bf71      0x11b obj/Technicl.o
+ .text.__ZN7tinystl13unordered_mapIjhNS_9allocatorEE6insertERKNS_4pairIjhEE
+                0x00d1c08c       0xf2 obj/Technicl.o
+                0x00d1c08c                __ZN7tinystl13unordered_mapIjhNS_9allocatorEE6insertERKNS_4pairIjhEE
+ .text.__ZN7tinystl13unordered_mapIjhNS_9allocatorEE4findERKj
+                0x00d1c17e       0x86 obj/Technicl.o
+                0x00d1c17e                __ZN7tinystl13unordered_mapIjhNS_9allocatorEE4findERKj
  .text.__ZN7tinystl13unordered_mapIjhNS_9allocatorEE6rehashEj
-                0x00d1c4d9       0xc2 obj/Technicl.o
-                0x00d1c4d9                __ZN7tinystl13unordered_mapIjhNS_9allocatorEE6rehashEj
- .text._main    0x00d1c59b       0x10 obj/Technicl.o
-                0x00d1c59b                _main
+                0x00d1c204       0xc2 obj/Technicl.o
+                0x00d1c204                __ZN7tinystl13unordered_mapIjhNS_9allocatorEE6rehashEj
+ .text._main    0x00d1c2c6       0x10 obj/Technicl.o
+                0x00d1c2c6                _main
  .text.__Z10perlinInitj
-                0x00d1c5ab       0x8e obj/Technicl.o
-                0x00d1c5ab                __Z10perlinInitj
+                0x00d1c2d6       0x8e obj/Technicl.o
+                0x00d1c2d6                __Z10perlinInitj
  .text.__Z4fadei
-                0x00d1c639       0x55 obj/Technicl.o
-                0x00d1c639                __Z4fadei
+                0x00d1c364       0x55 obj/Technicl.o
+                0x00d1c364                __Z4fadei
  .text.__Z4gradhii
-                0x00d1c68e       0x4b obj/Technicl.o
-                0x00d1c68e                __Z4gradhii
+                0x00d1c3b9       0x4b obj/Technicl.o
+                0x00d1c3b9                __Z4gradhii
  .text.__Z8perlin2djj
-                0x00d1c6d9      0x158 obj/Technicl.o
-                0x00d1c6d9                __Z8perlin2djj
- .text.__Z11hashTerrainjjjN7tinystl13unordered_mapIjhNS_9allocatorEEE
-                0x00d1c831       0x5c obj/Technicl.o
-                0x00d1c831                __Z11hashTerrainjjjN7tinystl13unordered_mapIjhNS_9allocatorEEE
+                0x00d1c404      0x158 obj/Technicl.o
+                0x00d1c404                __Z8perlin2djj
+ .text.__Z11hashTerrainjjjRN7tinystl13unordered_mapIjhNS_9allocatorEEE
+                0x00d1c55c       0x6b obj/Technicl.o
+                0x00d1c55c                __Z11hashTerrainjjjRN7tinystl13unordered_mapIjhNS_9allocatorEEE
  .text.__Z15create_randSeedv
-                0x00d1c88d       0xca obj/Technicl.o
-                0x00d1c88d                __Z15create_randSeedv
+                0x00d1c5c7       0xca obj/Technicl.o
+                0x00d1c5c7                __Z15create_randSeedv
+ .text.__Z14preload_valuesRN7tinystl13unordered_mapIjhNS_9allocatorEEE
+                0x00d1c691       0x7e obj/Technicl.o
+                0x00d1c691                __Z14preload_valuesRN7tinystl13unordered_mapIjhNS_9allocatorEEE
  .text.__Z9writeSavejjjRhN7tinystl13unordered_mapIjhNS0_9allocatorEEE
-                0x00d1c957      0x17c obj/Technicl.o
-                0x00d1c957                __Z9writeSavejjjRhN7tinystl13unordered_mapIjhNS0_9allocatorEEE
+                0x00d1c70f      0x17c obj/Technicl.o
+                0x00d1c70f                __Z9writeSavejjjRhN7tinystl13unordered_mapIjhNS0_9allocatorEEE
  .text.__Z8readSaveRjS_S_RhRN7tinystl13unordered_mapIjhNS1_9allocatorEEE
-                0x00d1cad3      0x1d8 obj/Technicl.o
-                0x00d1cad3                __Z8readSaveRjS_S_RhRN7tinystl13unordered_mapIjhNS1_9allocatorEEE
+                0x00d1c88b      0x1d8 obj/Technicl.o
+                0x00d1c88b                __Z8readSaveRjS_S_RhRN7tinystl13unordered_mapIjhNS1_9allocatorEEE
  .text.__Z4tickRN7tinystl13unordered_mapIjhNS_9allocatorEEES3_jj
-                0x00d1ccab      0x995 obj/Technicl.o
-                0x00d1ccab                __Z4tickRN7tinystl13unordered_mapIjhNS_9allocatorEEES3_jj
+                0x00d1ca63      0x995 obj/Technicl.o
+                0x00d1ca63                __Z4tickRN7tinystl13unordered_mapIjhNS_9allocatorEEES3_jj
  .text.__ZN7tinystl13unordered_mapIjhNS_9allocatorEE5eraseENS_23unordered_hash_iteratorIKNS_19unordered_hash_nodeIjhEEEE
-                0x00d1d640       0xb5 obj/Technicl.o
-                0x00d1d640                __ZN7tinystl13unordered_mapIjhNS_9allocatorEE5eraseENS_23unordered_hash_iteratorIKNS_19unordered_hash_nodeIjhEEEE
- .text._delay   0x00d1d6f5       0x2a obj/Technicl.o
-                0x00d1d6f5                _delay
-                0x00d1d6f5                _msleep
- .text._random  0x00d1d71f       0x55 obj/Technicl.o
-                0x00d1d71f                _random
+                0x00d1d3f8       0xb5 obj/Technicl.o
+                0x00d1d3f8                __ZN7tinystl13unordered_mapIjhNS_9allocatorEE5eraseENS_23unordered_hash_iteratorIKNS_19unordered_hash_nodeIjhEEEE
+ .text._delay   0x00d1d4ad       0x2a obj/Technicl.o
+                0x00d1d4ad                _delay
+                0x00d1d4ad                _msleep
+ .text._random  0x00d1d4d7       0x55 obj/Technicl.o
+                0x00d1d4d7                _random
  .text._srandom
-                0x00d1d774       0x17 obj/Technicl.o
-                0x00d1d774                _srandom
-                0x00d1d77b                __setstate
- .text.__Znwj   0x00d1d78b       0x47 obj/Technicl.o
-                0x00d1d78b                __Znwj
- .text.__ZdlPv  0x00d1d7d2       0x10 obj/Technicl.o
-                0x00d1d7d2                __ZdlPv
- .text._malloc  0x00d1d7e2       0xc2 C:/Users/Tri-America/Downloads/CEdev-Windows/CEdev/lib/libc/allocator_standard.a(allocator_standard.o)
-                0x00d1d7e2                _malloc
- .text._free    0x00d1d8a4       0xbd C:/Users/Tri-America/Downloads/CEdev-Windows/CEdev/lib/libc/allocator_standard.a(allocator_standard.o)
-                0x00d1d8a4                _free
+                0x00d1d52c       0x17 obj/Technicl.o
+                0x00d1d52c                _srandom
+                0x00d1d533                __setstate
+ .text.__Znwj   0x00d1d543       0x47 obj/Technicl.o
+                0x00d1d543                __Znwj
+ .text.__ZdlPv  0x00d1d58a       0x10 obj/Technicl.o
+                0x00d1d58a                __ZdlPv
+ .text._malloc  0x00d1d59a       0xc2 C:/Users/Tri-America/Downloads/CEdev-Windows/CEdev/lib/libc/allocator_standard.a(allocator_standard.o)
+                0x00d1d59a                _malloc
+ .text._free    0x00d1d65c       0xbd C:/Users/Tri-America/Downloads/CEdev-Windows/CEdev/lib/libc/allocator_standard.a(allocator_standard.o)
+                0x00d1d65c                _free
  *(.gnu.warning)
 
-.rodata         0x00d1d961       0x6d
+.rodata         0x00d1d719       0x70
  *(.rodata .rodata.* .gnu.linkonce.r.*)
  .rodata.__Z4gradhii
-                0x00d1d961       0x18 obj/Technicl.o
+                0x00d1d719       0x18 obj/Technicl.o
  .rodata.__Z4tickRN7tinystl13unordered_mapIjhNS_9allocatorEEES3_jj
-                0x00d1d979        0xc obj/Technicl.o
- .rodata._.str  0x00d1d985        0x8 obj/Technicl.o
+                0x00d1d731        0xc obj/Technicl.o
+ .rodata._.str  0x00d1d73d        0x8 obj/Technicl.o
+ .rodata._.str.7
+                0x00d1d745        0x3 obj/Technicl.o
  .rodata._.str.1
-                0x00d1d98d        0x3 obj/Technicl.o
- .rodata._.str.1.2
-                0x00d1d990        0x3 obj/Technicl.o
+                0x00d1d748        0x3 obj/Technicl.o
  .rodata.___const._Z19tile_selection_menuRhN7tinystl13unordered_mapIjhNS0_9allocatorEEEjj.possible_tile_selections
-                0x00d1d993        0x7 obj/Technicl.o
- .rodata._.str.10
-                0x00d1d99a        0x7 obj/Technicl.o
- .rodata._.str.1.11
-                0x00d1d9a1        0x5 obj/Technicl.o
+                0x00d1d74b        0x7 obj/Technicl.o
+ .rodata._.str.14
+                0x00d1d752        0x7 obj/Technicl.o
+ .rodata._.str.1.15
+                0x00d1d759        0x8 obj/Technicl.o
  .rodata._.str.2
-                0x00d1d9a6        0x3 obj/Technicl.o
+                0x00d1d761        0x3 obj/Technicl.o
  .rodata._.str.3
-                0x00d1d9a9        0x3 obj/Technicl.o
+                0x00d1d764        0x3 obj/Technicl.o
  .rodata.libload
-                0x00d1d9ac       0x22 obj/crt0.o
+                0x00d1d767       0x22 obj/crt0.o
 
-.init_array     0x00d1d9ce        0x0
+.init_array     0x00d1d789        0x0
                 [!provide]                        PROVIDE (__init_array_start = .)
  *(.preinit_array)
  *(SORT_BY_INIT_PRIORITY(.init_array.*))
  *(.init_array)
                 [!provide]                        PROVIDE (__init_array_end = .)
 
-.fini_array     0x00d1d9ce        0x0
+.fini_array     0x00d1d789        0x0
                 [!provide]                        PROVIDE (__fini_array_start = .)
  *(SORT_BY_INIT_PRIORITY(.fini_array.*))
  *(.fini_array)
                 [!provide]                        PROVIDE (__fini_array_end = .)
-                0x00d1d9ce                        ___data_low = .
+                0x00d1d789                        ___data_low = .
 
-.data           0x00d1d9ce     0x21c5
+.data           0x00d1d789     0x21c5
  *(.data .data.* .gnu.linkonce.d.*)
- .data          0x00d1d9ce       0x10 obj/Technicl.o
+ .data          0x00d1d789       0x10 obj/Technicl.o
  .data._gameTiles_tile_0_data
-                0x00d1d9de      0x102 obj/Technicl.o
-                0x00d1d9de                _gameTiles_tile_0_data
+                0x00d1d799      0x102 obj/Technicl.o
+                0x00d1d799                _gameTiles_tile_0_data
  .data._gameTiles_tile_1_data
-                0x00d1dae0      0x102 obj/Technicl.o
-                0x00d1dae0                _gameTiles_tile_1_data
+                0x00d1d89b      0x102 obj/Technicl.o
+                0x00d1d89b                _gameTiles_tile_1_data
  .data._gameTiles_tile_2_data
-                0x00d1dbe2      0x102 obj/Technicl.o
-                0x00d1dbe2                _gameTiles_tile_2_data
+                0x00d1d99d      0x102 obj/Technicl.o
+                0x00d1d99d                _gameTiles_tile_2_data
  .data._gameTiles_tile_3_data
-                0x00d1dce4      0x102 obj/Technicl.o
-                0x00d1dce4                _gameTiles_tile_3_data
+                0x00d1da9f      0x102 obj/Technicl.o
+                0x00d1da9f                _gameTiles_tile_3_data
  .data._gameTiles_tile_4_data
-                0x00d1dde6      0x102 obj/Technicl.o
-                0x00d1dde6                _gameTiles_tile_4_data
+                0x00d1dba1      0x102 obj/Technicl.o
+                0x00d1dba1                _gameTiles_tile_4_data
  .data._gameTiles_tile_5_data
-                0x00d1dee8      0x102 obj/Technicl.o
-                0x00d1dee8                _gameTiles_tile_5_data
+                0x00d1dca3      0x102 obj/Technicl.o
+                0x00d1dca3                _gameTiles_tile_5_data
  .data._gameTiles_tile_6_data
-                0x00d1dfea      0x102 obj/Technicl.o
-                0x00d1dfea                _gameTiles_tile_6_data
+                0x00d1dda5      0x102 obj/Technicl.o
+                0x00d1dda5                _gameTiles_tile_6_data
  .data._gameTiles_tile_7_data
-                0x00d1e0ec      0x102 obj/Technicl.o
-                0x00d1e0ec                _gameTiles_tile_7_data
+                0x00d1dea7      0x102 obj/Technicl.o
+                0x00d1dea7                _gameTiles_tile_7_data
  .data._gameTiles_tile_8_data
-                0x00d1e1ee      0x102 obj/Technicl.o
-                0x00d1e1ee                _gameTiles_tile_8_data
+                0x00d1dfa9      0x102 obj/Technicl.o
+                0x00d1dfa9                _gameTiles_tile_8_data
  .data._gameTiles_tile_9_data
-                0x00d1e2f0      0x102 obj/Technicl.o
-                0x00d1e2f0                _gameTiles_tile_9_data
+                0x00d1e0ab      0x102 obj/Technicl.o
+                0x00d1e0ab                _gameTiles_tile_9_data
  .data._gameTiles_tile_10_data
-                0x00d1e3f2      0x102 obj/Technicl.o
-                0x00d1e3f2                _gameTiles_tile_10_data
+                0x00d1e1ad      0x102 obj/Technicl.o
+                0x00d1e1ad                _gameTiles_tile_10_data
  .data._gameTiles_tile_11_data
-                0x00d1e4f4      0x102 obj/Technicl.o
-                0x00d1e4f4                _gameTiles_tile_11_data
+                0x00d1e2af      0x102 obj/Technicl.o
+                0x00d1e2af                _gameTiles_tile_11_data
  .data._gameTiles_tile_12_data
-                0x00d1e5f6      0x102 obj/Technicl.o
-                0x00d1e5f6                _gameTiles_tile_12_data
+                0x00d1e3b1      0x102 obj/Technicl.o
+                0x00d1e3b1                _gameTiles_tile_12_data
  .data._gameTiles_tile_13_data
-                0x00d1e6f8      0x102 obj/Technicl.o
-                0x00d1e6f8                _gameTiles_tile_13_data
+                0x00d1e4b3      0x102 obj/Technicl.o
+                0x00d1e4b3                _gameTiles_tile_13_data
  .data._gameTiles_tile_14_data
-                0x00d1e7fa      0x102 obj/Technicl.o
-                0x00d1e7fa                _gameTiles_tile_14_data
+                0x00d1e5b5      0x102 obj/Technicl.o
+                0x00d1e5b5                _gameTiles_tile_14_data
  .data._gameTiles_tile_15_data
-                0x00d1e8fc      0x102 obj/Technicl.o
-                0x00d1e8fc                _gameTiles_tile_15_data
+                0x00d1e6b7      0x102 obj/Technicl.o
+                0x00d1e6b7                _gameTiles_tile_15_data
  .data._gameTiles_tile_16_data
-                0x00d1e9fe      0x102 obj/Technicl.o
-                0x00d1e9fe                _gameTiles_tile_16_data
+                0x00d1e7b9      0x102 obj/Technicl.o
+                0x00d1e7b9                _gameTiles_tile_16_data
  .data._gameTiles_tile_17_data
-                0x00d1eb00      0x102 obj/Technicl.o
-                0x00d1eb00                _gameTiles_tile_17_data
+                0x00d1e8bb      0x102 obj/Technicl.o
+                0x00d1e8bb                _gameTiles_tile_17_data
  .data._gameTiles_tile_18_data
-                0x00d1ec02      0x102 obj/Technicl.o
-                0x00d1ec02                _gameTiles_tile_18_data
+                0x00d1e9bd      0x102 obj/Technicl.o
+                0x00d1e9bd                _gameTiles_tile_18_data
  .data._gameTiles_tile_19_data
-                0x00d1ed04      0x102 obj/Technicl.o
-                0x00d1ed04                _gameTiles_tile_19_data
+                0x00d1eabf      0x102 obj/Technicl.o
+                0x00d1eabf                _gameTiles_tile_19_data
  .data._gameTiles_tile_20_data
-                0x00d1ee06      0x102 obj/Technicl.o
-                0x00d1ee06                _gameTiles_tile_20_data
+                0x00d1ebc1      0x102 obj/Technicl.o
+                0x00d1ebc1                _gameTiles_tile_20_data
  .data._gameTiles_tile_21_data
-                0x00d1ef08      0x102 obj/Technicl.o
-                0x00d1ef08                _gameTiles_tile_21_data
+                0x00d1ecc3      0x102 obj/Technicl.o
+                0x00d1ecc3                _gameTiles_tile_21_data
  .data._gameTiles_tile_22_data
-                0x00d1f00a      0x102 obj/Technicl.o
-                0x00d1f00a                _gameTiles_tile_22_data
+                0x00d1edc5      0x102 obj/Technicl.o
+                0x00d1edc5                _gameTiles_tile_22_data
  .data._gameTiles_tile_23_data
-                0x00d1f10c      0x102 obj/Technicl.o
-                0x00d1f10c                _gameTiles_tile_23_data
+                0x00d1eec7      0x102 obj/Technicl.o
+                0x00d1eec7                _gameTiles_tile_23_data
  .data._gameTiles_tile_24_data
-                0x00d1f20e      0x102 obj/Technicl.o
-                0x00d1f20e                _gameTiles_tile_24_data
+                0x00d1efc9      0x102 obj/Technicl.o
+                0x00d1efc9                _gameTiles_tile_24_data
  .data._gameTiles_tile_25_data
-                0x00d1f310      0x102 obj/Technicl.o
-                0x00d1f310                _gameTiles_tile_25_data
+                0x00d1f0cb      0x102 obj/Technicl.o
+                0x00d1f0cb                _gameTiles_tile_25_data
  .data._gameTiles_tile_26_data
-                0x00d1f412      0x102 obj/Technicl.o
-                0x00d1f412                _gameTiles_tile_26_data
+                0x00d1f1cd      0x102 obj/Technicl.o
+                0x00d1f1cd                _gameTiles_tile_26_data
  .data._gameTiles_tile_27_data
-                0x00d1f514      0x102 obj/Technicl.o
-                0x00d1f514                _gameTiles_tile_27_data
+                0x00d1f2cf      0x102 obj/Technicl.o
+                0x00d1f2cf                _gameTiles_tile_27_data
  .data._gameTiles_tile_28_data
-                0x00d1f616      0x102 obj/Technicl.o
-                0x00d1f616                _gameTiles_tile_28_data
+                0x00d1f3d1      0x102 obj/Technicl.o
+                0x00d1f3d1                _gameTiles_tile_28_data
  .data._gameTiles_tile_29_data
-                0x00d1f718      0x102 obj/Technicl.o
-                0x00d1f718                _gameTiles_tile_29_data
+                0x00d1f4d3      0x102 obj/Technicl.o
+                0x00d1f4d3                _gameTiles_tile_29_data
  .data._gameTiles_tile_30_data
-                0x00d1f81a      0x102 obj/Technicl.o
-                0x00d1f81a                _gameTiles_tile_30_data
+                0x00d1f5d5      0x102 obj/Technicl.o
+                0x00d1f5d5                _gameTiles_tile_30_data
  .data._gameTiles_tile_31_data
-                0x00d1f91c      0x102 obj/Technicl.o
-                0x00d1f91c                _gameTiles_tile_31_data
- .data._game8   0x00d1fa1e       0x10 obj/Technicl.o
-                0x00d1fa1e                _game8
+                0x00d1f6d7      0x102 obj/Technicl.o
+                0x00d1f6d7                _gameTiles_tile_31_data
+ .data._game8   0x00d1f7d9       0x10 obj/Technicl.o
+                0x00d1f7d9                _game8
  .data._cursor_data
-                0x00d1fa2e      0x102 obj/Technicl.o
-                0x00d1fa2e                _cursor_data
+                0x00d1f7e9      0x102 obj/Technicl.o
+                0x00d1f7e9                _cursor_data
  .data._gameTiles_tiles_data
-                0x00d1fb30       0x60 obj/Technicl.o
-                0x00d1fb30                _gameTiles_tiles_data
+                0x00d1f8eb       0x60 obj/Technicl.o
+                0x00d1f8eb                _gameTiles_tiles_data
  .data._heap_ptr
-                0x00d1fb90        0x3 C:/Users/Tri-America/Downloads/CEdev-Windows/CEdev/lib/libc/allocator_standard.a(allocator_standard.o)
+                0x00d1f94b        0x3 C:/Users/Tri-America/Downloads/CEdev-Windows/CEdev/lib/libc/allocator_standard.a(allocator_standard.o)
  *(.data1)
-                0x00d1fb93                        ___runprgm_reloc_start = .
+                0x00d1f94e                        ___runprgm_reloc_start = .
  *(.runprgm.reloc)
-                0x00d1fb93                        ___runprgm_reloc_end = .
-                0x00d1fb93                        ___data_high = .
+                0x00d1f94e                        ___runprgm_reloc_end = .
+                0x00d1f94e                        ___data_high = .
                 0x000021c5                        ___data_len = (___data_high - ___data_low)
                 0x00d052c6                        . = BSSHEAP_LOW
                 0x00d052c6                        ___bss_low = .
 
-.bss            0x00d052c6      0x212
+.bss            0x00d052c6     0x4218
  *(.dynbss)
  *(.bss .bss.* .gnu.linkonce.b.*)
  .bss._seed     0x00d052c6        0x3 obj/Technicl.o
@@ -398,15 +399,24 @@ Linker script and memory map
                 0x00d052cc                _y
  .bss._perm     0x00d052cf      0x200 obj/Technicl.o
                 0x00d052cf                _perm
- .bss.__ZNSt12_GLOBAL__N_113__new_handlerE
+ .bss._preloaded_x
                 0x00d054cf        0x3 obj/Technicl.o
+                0x00d054cf                _preloaded_x
+ .bss._preloaded_y
+                0x00d054d2        0x3 obj/Technicl.o
+                0x00d054d2                _preloaded_y
+ .bss._tilemap_buffer
+                0x00d054d5     0x4000 obj/Technicl.o
+                0x00d054d5                _tilemap_buffer
+ .bss.__ZNSt12_GLOBAL__N_113__new_handlerE
+                0x00d094d5        0x3 obj/Technicl.o
  .bss.__alloc_base
-                0x00d054d2        0x6 C:/Users/Tri-America/Downloads/CEdev-Windows/CEdev/lib/libc/allocator_standard.a(allocator_standard.o)
+                0x00d094d8        0x6 C:/Users/Tri-America/Downloads/CEdev-Windows/CEdev/lib/libc/allocator_standard.a(allocator_standard.o)
  *(COMMON)
-                0x00d054d8                        ___bss_high = .
-                0x00000212                        ___bss_len = (___bss_high - ___bss_low)
+                0x00d094de                        ___bss_high = .
+                0x00004218                        ___bss_len = (___bss_high - ___bss_low)
                 0x00000001                        ASSERT ((. <= BSSHEAP_HIGH), Error: BSS exceed BSSHEAP_HIGH limit)
-                0x00d054d8                        ___heap_low = .
+                0x00d094de                        ___heap_low = .
                 0x00d13fd8                        . = BSSHEAP_HIGH
                 0x00d13fd8                        ___heap_high = .
 

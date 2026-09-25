@@ -34,4 +34,4 @@ obj/src/random.cpp.bc: src\random.cpp \
   src\TINYSTL\unordered_map.h src\TINYSTL\allocator.h \
   src\TINYSTL\stddef.h src\TINYSTL\buffer.h src\TINYSTL\new.h \
   src\TINYSTL\traits.h src\TINYSTL\hash.h src\TINYSTL\hash_base.h \
-  src\perlin.h
+  src\perlin.h src\game.h

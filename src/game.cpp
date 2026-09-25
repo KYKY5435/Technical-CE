@@ -27,6 +27,8 @@ void game();
 void tile_selection_menu(uint8_t &current_selection, const tinystl::unordered_map<uint24_t, uint8_t> modified_tiles, uint24_t x, uint24_t y);
 
 uint8_t tilemap_buffer[128][128] = {};
+uint24_t preloaded_x = 0;
+uint24_t preloaded_y = 0;
 
 uint24_t seed = 0;
 uint24_t x = 0, y = 0;
@@ -66,6 +68,11 @@ void game()
     readSave(seed, x, y, tile_selection, modified_tiles);
 
     perlinInit(seed);
+
+    preloaded_x = x & 0xFFFF80; 
+    preloaded_y = y & 0xFFFF80;
+    
+    preload_values(modified_tiles);
 
     uint8_t cx = 0, cy = 0;
     /*

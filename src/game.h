@@ -11,6 +11,7 @@ void tile_selection_menu(uint8_t &current_selection, const tinystl::unordered_ma
 
 extern uint24_t seed, x, y;
 extern uint8_t tilemap_buffer[128][128];
+extern uint24_t preloaded_x, preloaded_y;
 
 inline constexpr uint24_t BASE_X = GFX_LCD_WIDTH;
 inline constexpr uint8_t BASE_Y  = GFX_LCD_HEIGHT;

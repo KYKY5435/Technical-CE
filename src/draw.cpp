@@ -15,8 +15,15 @@
 
 #define WIDTH_OFFSET 5
 
-void render_level(uint24_t seed, const tinystl::unordered_map<uint24_t, uint8_t> modified_tiles, uint24_t x, uint24_t y, bool whole_level, bool generateHorizontal, bool generateTopLeft, uint8_t cx, uint8_t cy, const uint8_t speed)
+void render_level(uint24_t seed, tinystl::unordered_map<uint24_t, uint8_t> &modified_tiles, uint24_t x, uint24_t y, bool whole_level, bool generateHorizontal, bool generateTopLeft, uint8_t cx, uint8_t cy, const uint8_t speed)
 {
+    uint24_t x128 = x & 0xFFFF80; 
+    uint24_t y128 = y & 0xFFFF80;
+    if (preloaded_x != x128 || preloaded_y != y128) {
+        preloaded_x = x128;
+        preloaded_y = y128;
+        preload_values(modified_tiles);
+    } 
     if (whole_level)
     {
         gfx_SetDrawBuffer();
@@ -28,7 +35,7 @@ void render_level(uint24_t seed, const tinystl::unordered_map<uint24_t, uint8_t>
         {
             for (uint8_t j = 0; j < BASE_Y / TILE_SIZE; j++)
             {
-                gfx_Sprite_NoClip(gameTiles_tiles[hashTerrain(seed, (x + i), (y + j), modified_tiles)], TILE_SIZE * i, TILE_SIZE * j);
+                gfx_Sprite_NoClip(gameTiles_tiles[tilemap_buffer[i][j]], TILE_SIZE * i, TILE_SIZE * j);
             }
         }
     }
@@ -46,7 +53,7 @@ void render_level(uint24_t seed, const tinystl::unordered_map<uint24_t, uint8_t>
                 uint8_t new_tiles[BASE_X / TILE_SIZE];
                 for (uint8_t j = 0; j < BASE_X / TILE_SIZE; j++)
                 {
-                    new_tiles[j] = hashTerrain(seed, (x + j), newcoord, modified_tiles);
+                    new_tiles[j] = tilemap_buffer[j][newcoord & 0xFFFF80];
                 }
                 for (uint8_t i = speed; i <= TILE_SIZE; i += speed)
                 {
@@ -66,7 +73,7 @@ void render_level(uint24_t seed, const tinystl::unordered_map<uint24_t, uint8_t>
                 uint8_t new_tiles[BASE_X / TILE_SIZE];
                 for (uint8_t j = 0; j < BASE_X / TILE_SIZE; j++)
                 {
-                    new_tiles[j] = hashTerrain(seed, (x + j), newcoord, modified_tiles);
+                    new_tiles[j] = tilemap_buffer[j][newcoord & 0xFFFF80];
                 }
                 for (uint8_t i = speed; i <= TILE_SIZE; i += speed)
                 {
@@ -90,7 +97,7 @@ void render_level(uint24_t seed, const tinystl::unordered_map<uint24_t, uint8_t>
                 uint8_t new_tiles[BASE_Y / TILE_SIZE  - 1];
                 for (uint8_t j = 0; j < BASE_Y / TILE_SIZE; j++)
                 {
-                    new_tiles[j] = hashTerrain(seed, newcoord, (y + j), modified_tiles);
+                    new_tiles[j] = tilemap_buffer[newcoord%128][y%128 + j];
                 }
                 for (uint8_t i = speed; i <= TILE_SIZE; i += speed)
                 {
@@ -110,7 +117,7 @@ void render_level(uint24_t seed, const tinystl::unordered_map<uint24_t, uint8_t>
                 uint8_t new_tiles[BASE_Y / TILE_SIZE  - 1];
                 for (uint8_t j = 0; j < BASE_Y / TILE_SIZE - 1; j++)
                 {
-                    new_tiles[j] = hashTerrain(seed, newcoord, (y + j), modified_tiles);
+                    new_tiles[j] = tilemap_buffer[newcoord%128][y%128 + j];
                 }
                 for (uint8_t i = speed; i <= TILE_SIZE; i += speed)
                 {
