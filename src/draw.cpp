@@ -17,8 +17,8 @@
 
 void render_level(uint24_t seed, tinystl::unordered_map<uint24_t, uint8_t> &modified_tiles, uint24_t x, uint24_t y, bool whole_level, bool generateHorizontal, bool generateTopLeft, uint8_t cx, uint8_t cy, const uint8_t speed)
 {
-    uint24_t x128 = x & 0xFFFF80; 
-    uint24_t y128 = y & 0xFFFF80;
+    uint24_t x128 = (x - cx * generateTopLeft)  & 0xFFFF80;
+    uint24_t y128 = (y - cy * generateTopLeft) & 0xFFFF80;
     if (preloaded_x != x128 || preloaded_y != y128) {
         preloaded_x = x128;
         preloaded_y = y128;
@@ -53,7 +53,7 @@ void render_level(uint24_t seed, tinystl::unordered_map<uint24_t, uint8_t> &modi
                 uint8_t new_tiles[BASE_X / TILE_SIZE];
                 for (uint8_t j = 0; j < BASE_X / TILE_SIZE; j++)
                 {
-                    new_tiles[j] = tilemap_buffer[j][newcoord & 0xFFFF80];
+                    new_tiles[j] = tilemap_buffer[(x+j)  % 128][newcoord % 128];
                 }
                 for (uint8_t i = speed; i <= TILE_SIZE; i += speed)
                 {
@@ -73,7 +73,7 @@ void render_level(uint24_t seed, tinystl::unordered_map<uint24_t, uint8_t> &modi
                 uint8_t new_tiles[BASE_X / TILE_SIZE];
                 for (uint8_t j = 0; j < BASE_X / TILE_SIZE; j++)
                 {
-                    new_tiles[j] = tilemap_buffer[j][newcoord & 0xFFFF80];
+                    new_tiles[j] = tilemap_buffer[(x+j)  % 128][newcoord % 128];
                 }
                 for (uint8_t i = speed; i <= TILE_SIZE; i += speed)
                 {
@@ -97,7 +97,7 @@ void render_level(uint24_t seed, tinystl::unordered_map<uint24_t, uint8_t> &modi
                 uint8_t new_tiles[BASE_Y / TILE_SIZE  - 1];
                 for (uint8_t j = 0; j < BASE_Y / TILE_SIZE; j++)
                 {
-                    new_tiles[j] = tilemap_buffer[newcoord%128][y%128 + j];
+                    new_tiles[j] = tilemap_buffer[newcoord%128][(y+j)%128];
                 }
                 for (uint8_t i = speed; i <= TILE_SIZE; i += speed)
                 {
@@ -113,11 +113,11 @@ void render_level(uint24_t seed, tinystl::unordered_map<uint24_t, uint8_t> &modi
             {
                 // cx = 1
                 // moving <-
-                newcoord = x + cx + BASE_X / TILE_SIZE  - 1 - WIDTH_OFFSET;
+                newcoord = x + cx - WIDTH_OFFSET;
                 uint8_t new_tiles[BASE_Y / TILE_SIZE  - 1];
                 for (uint8_t j = 0; j < BASE_Y / TILE_SIZE - 1; j++)
                 {
-                    new_tiles[j] = tilemap_buffer[newcoord%128][y%128 + j];
+                    new_tiles[j] = tilemap_buffer[newcoord%128][(y+j)%128];
                 }
                 for (uint8_t i = speed; i <= TILE_SIZE; i += speed)
                 {

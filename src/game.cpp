@@ -149,7 +149,7 @@ void game()
             if (kb_IsDown(kb_Key2nd))
             {
                 gfx_SetDrawScreen();
-                modified_tiles[(x + 4) * 0x2f6e3bu + (y + 2) * 0x27d4ebu] = tile_selection;
+                tilemap_buffer[x & 0xFFFF80 + 4][y & 0xFFFF80 + 2] = tile_selection;
 
                 tick_tiles[(x + 4) * 0x2f6e3bu + (y + 2) * 0x27d4ebu] = 1;
                 tick(tick_tiles, modified_tiles, x, y);
@@ -161,14 +161,14 @@ void game()
             }
             if (kb_IsDown(kb_KeyAlpha))
             {
-                if (modified_tiles[(x + 4) * 0x2f6e3bu + (y + 2) * 0x27d4ebu] != 0)
+                if (tilemap_buffer[x & 0xFFFF80 + 4][y & 0xFFFF80 + 2] != 0)
                 {
                     gfx_SetDrawScreen();
 
                     tick_tiles[(x + 4) * 0x2f6e3bu + (y + 2) * 0x27d4ebu] = 2;
                     tick(tick_tiles, modified_tiles, x, y);
 
-                    modified_tiles[(x + 4) * 0x2f6e3bu + (y + 2) * 0x27d4ebu] = 0;
+                    tilemap_buffer[x & 0xFFFF80 + 4][y & 0xFFFF80 + 2] = 0;
                     gfx_Sprite_NoClip(gameTiles_tiles[0], 64, 32);
                     gfx_GetSprite_NoClip(curser_bg, 64, 32);
                     gfx_TransparentSprite_NoClip(cursor, 64, 32);
