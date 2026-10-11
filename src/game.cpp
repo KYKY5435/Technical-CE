@@ -295,8 +295,7 @@ void tile_selection_menu(uint8_t &current_selection, const tinystl::unordered_ma
 
     current_selection = possible_tile_selections[cursor_selection];
 
-    while (kb_AnyKey())
-        ;
+    while (kb_AnyKey());
 
     gfx_SetDrawBuffer();
     gfx_SwapDraw();
