@@ -15,10 +15,10 @@
 
 #define WIDTH_OFFSET 5
 
-void render_level(uint24_t seed, tinystl::unordered_map<uint24_t, uint8_t> &modified_tiles, uint24_t x, uint24_t y, bool whole_level, bool generateHorizontal, bool generateTopLeft, uint8_t cx, uint8_t cy, const uint8_t speed)
+void render_level(uint24_t seed, tinystl::unordered_map<uint24_t, uint8_t> &modified_tiles, uint24_t x, uint24_t y, bool whole_level, bool moveX, bool generateTopLeft, const uint8_t speed)
 {
-    uint24_t x128 = (x - cx * generateTopLeft)  & 0xFFFF80;
-    uint24_t y128 = (y - cy * generateTopLeft) & 0xFFFF80;
+    uint24_t x128 = (x - moveX * generateTopLeft)  & 0xFFFF80;
+    uint24_t y128 = (y - !moveX * generateTopLeft) & 0xFFFF80;
     if (preloaded_x != x128 || preloaded_y != y128) {
         preloaded_x = x128;
         preloaded_y = y128;
@@ -40,6 +40,31 @@ void render_level(uint24_t seed, tinystl::unordered_map<uint24_t, uint8_t> &modi
         }
     }
     else
+    {
+        /*
+        cx or cy is 1 or 0 (burh can be bool)
+        lets say generateTopLeft so that means that 
+            if generateTopLeft is true then 
+                if moveX then
+                    move level right ->
+                else (moveY)
+                    move level down v|
+            if generateTopLeft is false then
+                if moveX then
+                    move level left <-
+                else (moveY) 
+                    move level up ^|
+        DO NOT USE modified_tiles
+        USE tilemap_buffer  
+        */
+       if (generateTopLeft) {
+        if (moveX) {
+
+        }
+       }
+    }
+}
+/*
     {
         uint24_t newcoord = 0;
         if (generateHorizontal)
@@ -132,6 +157,7 @@ void render_level(uint24_t seed, tinystl::unordered_map<uint24_t, uint8_t> &modi
         }
     }
 }
+*/
 
 void render_tile_selection_menu(uint8_t current_selection, uint8_t possible_tile_selections[], uint8_t possible_tile_selections_count)
 {

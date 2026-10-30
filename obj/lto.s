@@ -1032,7 +1032,7 @@ __Z4initv:                              ; @_Z4initv
 	.type	__Z4gamev,@function
 __Z4gamev:                              ; @_Z4gamev
 ; %bb.0:
-	ld	hl, -84
+	ld	hl, -89
 	call	__frameset
 	lea	iy, ix - 12
 	lea	hl, ix - 24
@@ -1350,39 +1350,35 @@ __Z4gamev:                              ; @_Z4gamev
 	call	_gfx_SetDraw
 	pop	hl
 	ld	a, (ix - 28)
-	ld	(ix - 84), a
 	ld	hl, (_x)
-	ld	de, 3108411
-	push	de
-	pop	bc
-	call	__imulu
+	ld	(ix - 86), hl
+	ld	bc, 127
+	call	__iand
 	push	hl
 	pop	iy
-	ld	hl, (_y)
-	ld	de, 2610411
+	ld	de, 4
+	add	iy, de
+	ld	de, (_y)
 	push	de
-	pop	bc
-	call	__imulu
-	ex	de, hl
-	add	iy, de
-	ld	hl, 877250
-	ex	de, hl
-	add	iy, de
-	ld	(ix - 27), iy
-	pea	ix - 27
-	ld	hl, (ix - 55)
+	pop	hl
+	call	__iand
+	ld	(ix - 89), hl
+	lea	hl, iy + 0
+	ld	c, 7
+	call	__ishl
 	push	hl
-	call	__ZN7tinystl13unordered_mapIjhNS_9allocatorEEixERKj
-	pop	de
-	pop	de
-	ld	a, (ix - 84)
-	ld	(hl), a
-	ld	hl, (_x)
+	pop	bc
+	ld	iy, _tilemap_buffer
+	add	iy, bc
+	ld	bc, (ix - 89)
+	add	iy, bc
+	ld	(iy + 2), a
+	ld	hl, (ix - 86)
 	ld	bc, 3108411
 	call	__imulu
 	push	hl
 	pop	iy
-	ld	hl, (_y)
+	ex	de, hl
 	ld	bc, 2610411
 	call	__imulu
 	ex	de, hl
@@ -1452,24 +1448,22 @@ __Z4gamev:                              ; @_Z4gamev
 	jp	z, .LBB5_17
 ; %bb.15:                               ;   in Loop: Header=BB5_1 Depth=1
 	ld	hl, (_x)
-	ld	bc, 3108411
-	call	__imulu
+	ld	bc, -124
+	call	__iand
+	ex	de, hl
+	ld	hl, (_y)
+	ld	bc, -126
+	call	__iand
 	push	hl
 	pop	iy
-	ld	hl, (_y)
-	ld	bc, 2610411
-	call	__imulu
 	ex	de, hl
-	add	iy, de
-	ld	de, 877250
-	add	iy, de
-	ld	(ix - 27), iy
-	pea	ix - 27
-	ld	hl, (ix - 55)
-	push	hl
-	call	__ZN7tinystl13unordered_mapIjhNS_9allocatorEEixERKj
-	pop	de
-	pop	de
+	ld	c, 7
+	call	__ishl
+	ex	de, hl
+	ld	hl, _tilemap_buffer
+	add	hl, de
+	lea	de, iy + 0
+	add	hl, de
 	ld	a, (hl)
 	or	a, a
 	jp	z, .LBB5_17
@@ -1480,21 +1474,16 @@ __Z4gamev:                              ; @_Z4gamev
 	call	_gfx_SetDraw
 	pop	hl
 	ld	hl, (_x)
-	ld	de, 3108411
-	push	de
-	pop	bc
+	ld	bc, 3108411
 	call	__imulu
 	push	hl
 	pop	iy
 	ld	hl, (_y)
-	ld	de, 2610411
-	push	de
-	pop	bc
+	ld	bc, 2610411
 	call	__imulu
 	ex	de, hl
 	add	iy, de
-	ld	hl, 877250
-	ex	de, hl
+	ld	de, 877250
 	add	iy, de
 	ld	(ix - 27), iy
 	pea	ix - 27
@@ -1518,25 +1507,24 @@ __Z4gamev:                              ; @_Z4gamev
 	pop	hl
 	pop	hl
 	ld	hl, (_x)
-	ld	bc, 3108411
-	call	__imulu
+	ld	bc, 127
+	call	__iand
 	push	hl
 	pop	iy
+	ld	de, 4
+	add	iy, de
 	ld	hl, (_y)
-	ld	bc, 2610411
-	call	__imulu
+	call	__iand
 	ex	de, hl
-	add	iy, de
-	ld	de, 877250
-	add	iy, de
-	ld	(ix - 27), iy
-	pea	ix - 27
-	ld	hl, (ix - 55)
+	lea	hl, iy + 0
+	ld	c, 7
+	call	__ishl
 	push	hl
-	call	__ZN7tinystl13unordered_mapIjhNS_9allocatorEEixERKj
-	pop	de
-	pop	de
-	ld	(hl), 0
+	pop	bc
+	ld	iy, _tilemap_buffer
+	add	iy, bc
+	add	iy, de
+	ld	(iy + 2), 0
 	ld	hl, (_gameTiles_tiles_data)
 	ld	de, 32
 	push	de

@@ -73,19 +73,18 @@ void game()
     preloaded_y = y & 0xFFFF80;
     
     preload_values(modified_tiles);
-
-    uint8_t cx = 0, cy = 0;
+    
+    /*
+    true: veritcal is generated (x movement)
+    false: horizontal is generated (y movement)
+    */
+    bool moveX = false;
     /*
     Should the level be generated
     */
     bool generate = false;
     /*
-    false: veritcal is generated (x movement)
-    true horizontal is generated (y movement)
-    */
-    bool generateHorizontal = false;
-    /*
-    generate horizontal/vertical on the x = 0, y = 0 or on the other corner
+    Should the new stuff be drawn from top left corner
     */
     bool generateTopLeft = false;
 
@@ -112,44 +111,36 @@ void game()
     {
         if (kb_AnyKey())
         {
-            cx = 0;
-            cy = 0;
             msleep(20);
 
             if (kb_IsDown(kb_KeyUp))
             {
                 generate = true;
-                generateHorizontal = true;
                 generateTopLeft = true;
-                cy = 1;
+                moveX = false;
             }
             if (kb_IsDown(kb_KeyDown))
             {
                 generate = true;
-                generateHorizontal = true;
+                moveX = false;
                 generateTopLeft = false;
-                cy = 1;
             }
             if (kb_IsDown(kb_KeyLeft))
             {
                 generate = true;
-                generateHorizontal = false;
+                moveX = true;
                 generateTopLeft = true;
-                cy = 0;
-                cx = 1;
             }
             if (kb_IsDown(kb_KeyRight))
             {
                 generate = true;
-                generateHorizontal = false;
+                moveX = true;
                 generateTopLeft = false;
-                cy = 0;
-                cx = 1;
             }
             if (kb_IsDown(kb_Key2nd))
             {
                 gfx_SetDrawScreen();
-                tilemap_buffer[x & 0xFFFF80 + 4][y & 0xFFFF80 + 2] = tile_selection;
+                tilemap_buffer[x % 128 + 4][y % 128 + 2] = tile_selection;
 
                 tick_tiles[(x + 4) * 0x2f6e3bu + (y + 2) * 0x27d4ebu] = 1;
                 tick(tick_tiles, modified_tiles, x, y);
@@ -161,14 +152,14 @@ void game()
             }
             if (kb_IsDown(kb_KeyAlpha))
             {
-                if (tilemap_buffer[x & 0xFFFF80 + 4][y & 0xFFFF80 + 2] != 0)
+                if (tilemap_buffer[x  % 128 + 4][y % 128 + 2] != 0)
                 {
                     gfx_SetDrawScreen();
 
                     tick_tiles[(x + 4) * 0x2f6e3bu + (y + 2) * 0x27d4ebu] = 2;
                     tick(tick_tiles, modified_tiles, x, y);
 
-                    tilemap_buffer[x & 0xFFFF80 + 4][y & 0xFFFF80 + 2] = 0;
+                    tilemap_buffer[x % 128 + 4][y % 128 + 2] = 0;
                     gfx_Sprite_NoClip(gameTiles_tiles[0], 64, 32);
                     gfx_GetSprite_NoClip(curser_bg, 64, 32);
                     gfx_TransparentSprite_NoClip(cursor, 64, 32);
@@ -188,9 +179,9 @@ void game()
                 gfx_SetDrawBuffer();
 
                 gfx_SetClipRegion(0, 0, BASE_X - 5 * TILE_SIZE, BASE_Y);
-                render_level(seed, modified_tiles, x, y, false, generateHorizontal, generateTopLeft, cx, cy, 2);
-                x += (generateTopLeft) ? -cx : cx;
-                y += (generateTopLeft) ? -cy : cy;
+                render_level(seed, modified_tiles, x, y, false, moveX, generateTopLeft, 2);
+                x += moveX * (generateTopLeft ? -1 : 1);
+                y += !moveX * (generateTopLeft ? -1 : 1);
                 generate = false;
 
                 gfx_SetDrawScreen();
