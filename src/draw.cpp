@@ -13,23 +13,26 @@
 
 #define TILE_SIZE 16
 
+#define SPEED 4
+
 #define WIDTH_OFFSET 5
 
 void render_level(uint24_t seed, tinystl::unordered_map<uint24_t, uint8_t> &modified_tiles, uint24_t x, uint24_t y, bool whole_level, bool moveX, bool generateTopLeft, const uint8_t speed)
 {
-    uint24_t x128 = (x - moveX * generateTopLeft)  & 0xFFFF80;
+    uint24_t x128 = (x - moveX * generateTopLeft) & 0xFFFF80;
     uint24_t y128 = (y - !moveX * generateTopLeft) & 0xFFFF80;
-    if (preloaded_x != x128 || preloaded_y != y128) {
+    if (preloaded_x != x128 || preloaded_y != y128)
+    {
         preloaded_x = x128;
         preloaded_y = y128;
         preload_values(modified_tiles);
-    } 
+    }
     if (whole_level)
     {
         gfx_SetDrawBuffer();
         gfx_ZeroScreen();
         gfx_PrintStringXY("Loading", 0, 0);
-        
+
         gfx_SwapDraw();
         for (uint8_t i = 0; i < BASE_X / TILE_SIZE - WIDTH_OFFSET; i++)
         {
@@ -43,8 +46,8 @@ void render_level(uint24_t seed, tinystl::unordered_map<uint24_t, uint8_t> &modi
     {
         /*
         cx or cy is 1 or 0 (burh can be bool)
-        lets say generateTopLeft so that means that 
-            if generateTopLeft is true then 
+        lets say generateTopLeft so that means that
+            if generateTopLeft is true then
                 if moveX then
                     move level right ->
                 else (moveY)
@@ -52,16 +55,117 @@ void render_level(uint24_t seed, tinystl::unordered_map<uint24_t, uint8_t> &modi
             if generateTopLeft is false then
                 if moveX then
                     move level left <-
-                else (moveY) 
+                else (moveY)
                     move level up ^|
         DO NOT USE modified_tiles
-        USE tilemap_buffer  
-        */
-       if (generateTopLeft) {
-        if (moveX) {
+        USE tilemap_buffer
 
+        Sizes:
+        16x16 sprites
+        320x240 screen
+        ->
+        15 width
+        15 height
+
+        I want to smooth it out, so 8 frames of movement (SPEED pixels a move)
+
+        */
+        uint24_t newcoord = 0;
+        if (generateTopLeft)
+        {
+            if (moveX)
+            { // ->
+                newcoord = (x - 1) % 128;
+
+                gfx_sprite_t *preload[15] = {};
+
+                // prerender new sprites
+                for (uint8_t j = 0; j < 15; j++)
+                {
+                    preload[j] = gameTiles_tiles[tilemap_buffer[newcoord][(y + j) % 128]];
+                }
+                gfx_SetClipRegion(0, 0, SPEED, 15 * TILE_SIZE);
+                for (uint8_t i = 1; i < 5; i++)
+                {
+                    gfx_CopyRectangle(gfx_screen, gfx_buffer, 0, 0, SPEED, 0, 15 * TILE_SIZE - SPEED, 15 * TILE_SIZE);
+                    for (uint8_t j = 0; j < 15; j++)
+                    {
+                        gfx_Sprite(preload[j], -TILE_SIZE + SPEED * i, 16 * j);
+                    }
+                    gfx_SwapDraw();
+                }
+            }
+            else
+            { // down
+                newcoord = (y - 1) % 128;
+
+                gfx_sprite_t *preload[15] = {};
+
+                // prerender new sprites
+                for (uint8_t j = 0; j < 15; j++)
+                {
+                    preload[j] = gameTiles_tiles[tilemap_buffer[(x + j) % 128][newcoord]];
+                }
+                gfx_SetClipRegion(0, 0, 15 * TILE_SIZE, SPEED);
+                for (uint8_t i = 1; i < 5; i++)
+                {
+                    gfx_CopyRectangle(gfx_screen, gfx_buffer, 0, 0, 0, SPEED, 15 * TILE_SIZE, 15 * TILE_SIZE - SPEED);
+                    for (uint8_t j = 0; j < 15; j++)
+                    {
+                        gfx_Sprite(preload[j], 16 * j, -TILE_SIZE + SPEED * i);
+                    }
+                    gfx_SwapDraw();
+                }
+            }
         }
-       }
+        else
+        {
+            if (moveX)
+            { // <-
+                newcoord = (x + 1 + 14) % 128;
+
+                gfx_sprite_t *preload[15] = {};
+
+                // prerender new sprites
+                for (uint8_t j = 0; j < 15; j++)
+                {
+                    preload[j] = gameTiles_tiles[tilemap_buffer[newcoord][(y + j) % 128]];
+                }
+                gfx_SetClipRegion(15 * TILE_SIZE - SPEED, 0, 15 * TILE_SIZE, 15 * TILE_SIZE);
+                for (uint8_t i = 1; i < 5; i++)
+                {
+                    gfx_CopyRectangle(gfx_screen, gfx_buffer, SPEED, 0, 0, 0, 15 * TILE_SIZE - SPEED, 15 * TILE_SIZE);
+                    for (uint8_t j = 0; j < 15; j++)
+                    {
+                        gfx_Sprite(preload[j], 15 * TILE_SIZE - SPEED * i, 16 * j);
+                    }
+                    gfx_SwapDraw();
+                }
+            }
+            else
+            { // up
+                newcoord = (y + 1 + 14) % 128;
+
+                gfx_sprite_t *preload[15] = {};
+
+                // prerender new sprites
+                for (uint8_t j = 0; j < 15; j++)
+                {
+                    preload[j] = gameTiles_tiles[tilemap_buffer[(x + j) % 128][newcoord]];
+                }
+                gfx_SetClipRegion(0, 15 * TILE_SIZE - SPEED, 15 * TILE_SIZE, 15 * TILE_SIZE);
+                for (uint8_t i = 1; i < 5; i++)
+                {
+                    gfx_CopyRectangle(gfx_screen, gfx_buffer, 0, SPEED, 0, 0, 15 * TILE_SIZE, 15 * TILE_SIZE - SPEED);
+                    for (uint8_t j = 0; j < 15; j++)
+                    {
+                        gfx_Sprite(preload[j], 16 * j, 15 * TILE_SIZE - SPEED * i);
+                    }
+                    gfx_SwapDraw();
+                }
+            }
+        }
+        gfx_SetClipRegion(0, 0, GFX_LCD_WIDTH, GFX_LCD_HEIGHT);
     }
 }
 /*
@@ -175,17 +279,18 @@ void render_tile_selection_menu(uint8_t current_selection, uint8_t possible_tile
 
     uint8_t cursor_selection = 0;
 
-    for (uint8_t j = 0; j < possible_tile_selections_count/ sizeof(possible_tile_selections[0]); j++ ) {
-        if (possible_tile_selections[j] == current_selection) {
+    for (uint8_t j = 0; j < possible_tile_selections_count / sizeof(possible_tile_selections[0]); j++)
+    {
+        if (possible_tile_selections[j] == current_selection)
+        {
             cursor_selection = j;
         }
     }
 
-    for (uint8_t j = 0; j < possible_tile_selections_count && j < ROW_SIZE * COLUMN_SIZE; j ++) {
-        gfx_Sprite_NoClip(gameTiles_tiles[possible_tile_selections[j]], 8+j%ROW_SIZE*TILE_SIZE, 8+j/ROW_SIZE*TILE_SIZE);
+    for (uint8_t j = 0; j < possible_tile_selections_count && j < ROW_SIZE * COLUMN_SIZE; j++)
+    {
+        gfx_Sprite_NoClip(gameTiles_tiles[possible_tile_selections[j]], 8 + j % ROW_SIZE * TILE_SIZE, 8 + j / ROW_SIZE * TILE_SIZE);
     }
-
-    
 
     gfx_SwapDraw();
     gfx_SetDrawScreen();
