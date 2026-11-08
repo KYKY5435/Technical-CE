@@ -1,1 +1,1 @@
-obj/src/gfx/gameTiles.c.s: src\gfx\gameTiles.c
+obj/src/gfx/gameTiles.c.bc: src\gfx\gameTiles.c

@@ -22,10 +22,6 @@
 #define NUMBER_OF_TILES 16
 #define TILE_SIZE 16
 
-void init();
-void game();
-void tile_selection_menu(uint8_t &current_selection, const tinystl::unordered_map<uint24_t, uint8_t> modified_tiles, uint24_t x, uint24_t y);
-
 uint8_t tilemap_buffer[128][128] = {};
 uint24_t preloaded_x = 0;
 uint24_t preloaded_y = 0;
@@ -140,10 +136,8 @@ void game()
             if (kb_IsDown(kb_Key2nd))
             {
                 gfx_SetDrawScreen();
-                tilemap_buffer[x % 128 + 4][y % 128 + 2] = tile_selection;
-
-                tick_tiles[(x + 4) * 0x2f6e3bu + (y + 2) * 0x27d4ebu] = 1;
-                tick(tick_tiles, modified_tiles, x, y);
+                add_tick_tile(x+4,y+2,tile_selection,Tick_Types::ADD);
+                modified_tiles[hashCoords(x+4,y+2)] = tile_selection;
 
                 gfx_GetSprite_NoClip(curser_bg, 64, 32);
                 gfx_TransparentSprite_NoClip(cursor, 64, 32);
@@ -156,8 +150,8 @@ void game()
                 {
                     gfx_SetDrawScreen();
 
-                    tick_tiles[(x + 4) * 0x2f6e3bu + (y + 2) * 0x27d4ebu] = 2;
-                    tick(tick_tiles, modified_tiles, x, y);
+                    tick_tiles[hashCoords(x+4,y+2)] = 2;
+                    tick(tick_tiles, modified_tiles);
 
                     tilemap_buffer[x % 128 + 4][y % 128 + 2] = 0;
                     gfx_Sprite_NoClip(gameTiles_tiles[0], 64, 32);
@@ -196,7 +190,7 @@ void game()
                 gfx_SetDrawBuffer();
             }
         }
-
+        concurrent_tick(modified_tiles);
         // tick(tick_tiles, modified_tiles,x,y); not needed if nothing happens
     }
 

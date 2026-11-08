@@ -48,7 +48,6 @@ void render_level(uint24_t seed, tinystl::unordered_map<uint24_t, uint8_t> &modi
             for (uint8_t j = 0; j < BASE_Y / TILE_SIZE; j++)
             {
                 gfx_Sprite_NoClip(gameTiles_tiles[tilemap_buffer[x%128+i][y%128+j]], TILE_SIZE * i, TILE_SIZE * j);
-                sleep(1);
             }
         }
     }
@@ -198,8 +197,8 @@ void render_level(uint24_t seed, tinystl::unordered_map<uint24_t, uint8_t> &modi
                 }
             }
         }
-        gfx_SetClipRegion(0, 0, GFX_LCD_WIDTH, GFX_LCD_HEIGHT);
     }
+    gfx_SetClipRegion(0, 0, GFX_LCD_WIDTH, GFX_LCD_HEIGHT);
 }
 /*
     {

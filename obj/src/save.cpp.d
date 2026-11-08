@@ -1,4 +1,4 @@
-obj/src/save.cpp.s: src\save.cpp \
+obj/src/save.cpp.bc: src\save.cpp \
   C:\Users\Tri-America\Downloads\CEdev-Windows\CEdev\include\stdint.h \
   C:\Users\Tri-America\Downloads\CEdev-Windows\CEdev\include\cdefs.h \
   C:\Users\Tri-America\Downloads\CEdev-Windows\CEdev\include\tice.h \

@@ -1,4 +1,4 @@
-obj/src/game.cpp.s: src\game.cpp \
+obj/src/game.cpp.bc: src\game.cpp \
   C:\Users\Tri-America\Downloads\CEdev-Windows\CEdev\include\graphx.h \
   C:\Users\Tri-America\Downloads\CEdev-Windows\CEdev\include\stdint.h \
   C:\Users\Tri-America\Downloads\CEdev-Windows\CEdev\include\cdefs.h \

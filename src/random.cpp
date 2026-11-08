@@ -8,6 +8,10 @@
 #include "perlin.h"
 #include "game.h"
 
+uint24_t hashCoords(uint24_t coordx, uint24_t coordy){
+    return coordx * 0x2f6e3bu + coordy * 0x27d4ebu;
+}
+
 uint8_t hashTerrain(uint24_t seed, uint24_t x, uint24_t y, tinystl::unordered_map<uint24_t, uint8_t> &modified_tiles)
 {
     uint24_t h = x * 0x2f6e3bu + y * 0x27d4ebu;

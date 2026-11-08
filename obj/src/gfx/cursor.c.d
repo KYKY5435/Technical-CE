@@ -1,1 +1,1 @@
-obj/src/gfx/cursor.c.s: src\gfx\cursor.c
+obj/src/gfx/cursor.c.bc: src\gfx\cursor.c
