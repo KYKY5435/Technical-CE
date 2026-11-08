@@ -1,4 +1,4 @@
-obj/src/tick.cpp.bc: src\tick.cpp \
+obj/src/tick.cpp.s: src\tick.cpp \
   C:\Users\Tri-America\Downloads\CEdev-Windows\CEdev\include\stdint.h \
   C:\Users\Tri-America\Downloads\CEdev-Windows\CEdev\include\cdefs.h \
   C:\Users\Tri-America\Downloads\CEdev-Windows\CEdev\include\tice.h \

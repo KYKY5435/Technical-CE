@@ -1,4 +1,4 @@
-obj/src/perlin.cpp.bc: src\perlin.cpp \
+obj/src/perlin.cpp.s: src\perlin.cpp \
   C:\Users\Tri-America\Downloads\CEdev-Windows\CEdev\include\c++\math.h \
   C:\Users\Tri-America\Downloads\CEdev-Windows\CEdev\include\c++\stdlib.h \
   C:\Users\Tri-America\Downloads\CEdev-Windows\CEdev\include\stdlib.h \

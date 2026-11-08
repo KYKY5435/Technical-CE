@@ -2,7 +2,7 @@
 #define HAS_INIT_ARRAY 0
 #define HAS_FINI_ARRAY 0
 #define HAS_CLOCK 1
-#define HAS_ABORT 0
+#define HAS_ABORT 1
 #define HAS_EXIT 0
 #define HAS_C99__EXIT 0
 #define HAS_RUN_PRGM 0
@@ -30,6 +30,10 @@ _ti_Write:
 	.type _ti_Read, @function
 _ti_Read:
 	jp 15
+	.global _ti_PutC
+	.type _ti_PutC, @function
+_ti_PutC:
+	jp 21
 	.global _ti_Rewind
 	.type _ti_Rewind, @function
 _ti_Rewind:

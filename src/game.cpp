@@ -90,7 +90,7 @@ void game()
 
     gfx_SetPalette(game8, sizeof_game8, 0);
 
-    render_level(seed, modified_tiles, x, y, true);
+    render_level(seed, modified_tiles, true);
 
     //gfx_PrintStringXY("Tasks:", 0, 96);
     //gfx_SetTextXY(48, 96);
@@ -179,7 +179,7 @@ void game()
                 gfx_SetDrawBuffer();
 
                 gfx_SetClipRegion(0, 0, BASE_X - 5 * TILE_SIZE, BASE_Y);
-                render_level(seed, modified_tiles, x, y, false, moveX, generateTopLeft, 2);
+                render_level(seed, modified_tiles, false, moveX, generateTopLeft, 2);
                 x += moveX * (generateTopLeft ? -1 : 1);
                 y += !moveX * (generateTopLeft ? -1 : 1);
                 generate = false;

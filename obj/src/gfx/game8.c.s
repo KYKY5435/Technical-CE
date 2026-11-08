@@ -1,13 +1,13 @@
 	.section	.text,"ax",@progbits
 	.assume	ADL = 1
 	.file	"game8.c"
-	.file	0 "C:\\Users\\Tri-America\\Downloads\\proceduallygeneratednoise" "src/gfx\\game8.c" md5 0x48d1e75280fc6f512acf04ccd211215b
-	.file	1 "src/gfx" "game8.c" md5 0x48d1e75280fc6f512acf04ccd211215b
+	.file	0 "C:\\Users\\Tri-America\\Downloads\\proceduallygeneratednoise" "src/gfx\\game8.c" md5 0x0aeecb77e30a4a663f0633e9f6461b40
+	.file	1 "src/gfx" "game8.c" md5 0x0aeecb77e30a4a663f0633e9f6461b40
 	.section	.data._game8,"aw",@progbits
 	.balign	1
 	.globl	_game8
 _game8:
-	.ascii	"\000\000\377\377\t|Pw\000<\000`"
+	.ascii	"\000\000\377\377\t|Pw\000<\000`V\222\333\222"
 
 	.section	.debug_abbrev,"",@progbits
 	.local	.Labbrev_start0
@@ -118,7 +118,7 @@ _game8:
 	d32	53                              ; DW_AT_type
 	db	4                               ; Abbrev [4] 0x2e:0x6 DW_TAG_subrange_type
 	d32	57                              ; DW_AT_type
-	db	12                              ; DW_AT_count
+	db	16                              ; DW_AT_count
 	db	0                               ; End Of Children Mark
 	db	5                               ; Abbrev [5] 0x35:0x4 DW_TAG_base_type
 	db	4                               ; DW_AT_name

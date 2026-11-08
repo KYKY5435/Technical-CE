@@ -19,6 +19,10 @@ _ti_Write:
  .type _ti_Read, @function
 _ti_Read:
  jp 15
+ .global _ti_PutC
+ .type _ti_PutC, @function
+_ti_PutC:
+ jp 21
  .global _ti_Rewind
  .type _ti_Rewind, @function
 _ti_Rewind:
@@ -250,6 +254,13 @@ ___exithl:
 ; We have now called all atexit/on_exit and fini functions
 ; HL = exit status
 ;-------------------------------------------------------------------------------
+ ; jr .L.skip._abort
+ db $FD ; ld iy, *
+ .global _abort
+ .type _abort, @function
+_abort:
+ ld hl, 6 ; SIGABRT
+.L.skip._abort:
  ld sp, 0
  .global _exit.sp
  .equ _exit.sp, $ - 3

@@ -11,39 +11,72 @@
 #include "gfx/gfx.h"
 #include "game.h"
 
+#define DRAW_OFFSET 0xFFFF80
+
 #define TILE_SIZE 16
 
 #define SPEED 4
 
 #define WIDTH_OFFSET 5
 
-void render_level(uint24_t seed, tinystl::unordered_map<uint24_t, uint8_t> &modified_tiles, uint24_t x, uint24_t y, bool whole_level, bool moveX, bool generateTopLeft, const uint8_t speed)
+uint24_t calc_offset(uint24_t axis, bool direction, bool generateTopLeft)
 {
-    uint24_t x128 = (x - moveX * generateTopLeft) & 0xFFFF80;
-    uint24_t y128 = (y - !moveX * generateTopLeft) & 0xFFFF80;
-    if (preloaded_x != x128 || preloaded_y != y128)
+    if (direction)
     {
-        preloaded_x = x128;
-        preloaded_y = y128;
-        preload_values(modified_tiles);
+        if (generateTopLeft)
+        {
+            return (axis - 1) & DRAW_OFFSET;
+        }
+        else
+        {
+            return (axis + 14 + 1) & DRAW_OFFSET;
+        }
     }
+    return axis & DRAW_OFFSET;
+}
+
+void render_level(uint24_t seed, tinystl::unordered_map<uint24_t, uint8_t> &modified_tiles, bool whole_level, bool moveX, bool generateTopLeft, const uint8_t speed)
+{
     if (whole_level)
     {
         gfx_SetDrawBuffer();
         gfx_ZeroScreen();
         gfx_PrintStringXY("Loading", 0, 0);
-
         gfx_SwapDraw();
         for (uint8_t i = 0; i < BASE_X / TILE_SIZE - WIDTH_OFFSET; i++)
         {
             for (uint8_t j = 0; j < BASE_Y / TILE_SIZE; j++)
             {
-                gfx_Sprite_NoClip(gameTiles_tiles[tilemap_buffer[i][j]], TILE_SIZE * i, TILE_SIZE * j);
+                gfx_Sprite_NoClip(gameTiles_tiles[tilemap_buffer[x%128+i][y%128+j]], TILE_SIZE * i, TILE_SIZE * j);
+                sleep(1);
             }
         }
     }
     else
     {
+        //update preloaded tiles
+        const uint24_t x128 = calc_offset(x, moveX, generateTopLeft);
+        const uint24_t y128 = calc_offset(y, !moveX, generateTopLeft);
+        dbg_printf("x128: %u\n", x128);
+        dbg_printf("y128: %u\n", y128);
+        dbg_printf("moveX: %u\n", moveX);
+        if (preloaded_x != x128 || preloaded_y != y128)
+        {
+            preloaded_x = x128;
+            preloaded_y = y128;
+            preload_values(modified_tiles);
+            for (uint8_t i = 0; i < 14; i++)
+            {
+                x += moveX * (generateTopLeft ? -1 : 1);
+                y += !moveX * (generateTopLeft ? -1 : 1);
+
+                render_level(seed, modified_tiles, whole_level, moveX, generateTopLeft, speed);
+            }
+            dbg_printf("x& DRAW_OFFSET: %u\n", x & DRAW_OFFSET);
+            dbg_printf("y& DRAW_OFFSET: %u\n", y & DRAW_OFFSET);
+            dbg_printf("preloaded_x: %u\n", preloaded_x);
+            dbg_printf("preloaded_y: %u\n", preloaded_y);
+        }
         /*
         cx or cy is 1 or 0 (burh can be bool)
         lets say generateTopLeft so that means that

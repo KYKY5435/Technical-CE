@@ -1,4 +1,4 @@
-obj/src/main.cpp.bc: src\main.cpp \
+obj/src/main.cpp.s: src\main.cpp \
   C:\Users\Tri-America\Downloads\CEdev-Windows\CEdev\include\keypadc.h \
   C:\Users\Tri-America\Downloads\CEdev-Windows\CEdev\include\stdint.h \
   C:\Users\Tri-America\Downloads\CEdev-Windows\CEdev\include\cdefs.h \
