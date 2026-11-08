@@ -21,7 +21,9 @@ const uint8_t TILE_SIZE = 16;
 enum class Tick_Types : uint8_t
 {
     ADD = 0,
-    REMOVE
+    REMOVE,
+    NOTHING,
+    UPDATE_ELECTICITY
 };
 
 struct Tile
@@ -35,6 +37,8 @@ struct Tile
 Tile to_update_tiles[256] = {};
 uint8_t tile_count = 0;
 uint8_t tick_tile_count = 0;
+
+uint8_t number_of_ticks_left = 0;
 
 /*
 True: Successful
@@ -50,13 +54,36 @@ bool push_tile(Tile tile_array)
 
 void add_tick_tile(uint24_t x, uint24_t y, uint8_t tile_index, Tick_Types how_to_update)
 {
+    dbg_printf("111111111111111111111\n");
+    dbg_printf("tile_count = %u\n", tile_count);
+    dbg_printf("tick_tile_count = %u\n", tick_tile_count);
+    dbg_printf("x = %u\n", x - 4);
+    dbg_printf("y  = %u\n", y - 2);
     push_tile(Tile{x, y, tile_index, how_to_update});
+    number_of_ticks_left++;
+    dbg_printf("number_of_ticks_left = %u\n", number_of_ticks_left);
 }
 
 void concurrent_tick(tinystl::unordered_map<uint24_t, uint8_t> &modified_tiles)
 {
+    if (number_of_ticks_left == 0) return;
+    dbg_printf("22222222222222222222222222222\n");
+    dbg_printf("tile_count = %u\n", tile_count);
+    dbg_printf("tick_tile_count = %u\n", tick_tile_count);
+    dbg_printf("x = %u\n", x - 4);
+    dbg_printf("y  = %u\n", y - 2);
+    dbg_printf("number_of_ticks_left = %u\n", number_of_ticks_left);
     Tile current = to_update_tiles[tick_tile_count];
     tick_tile_count++;
+
+    if (current.how_to_update == Tick_Types::NOTHING)
+    {
+        return;
+    }
+
+    number_of_ticks_left--;
+    dbg_printf("current.how_to_update = %u\n", current.how_to_update);
+    dbg_printf("number_of_ticks_left = %u\n", number_of_ticks_left);
 
     uint8_t current_tile_index = current.current_tile_index;
 
@@ -64,12 +91,15 @@ void concurrent_tick(tinystl::unordered_map<uint24_t, uint8_t> &modified_tiles)
 
     if (contains(tiles_no_update, sizeof(tiles_no_update) / sizeof(tiles_no_update[0]), current_tile_index))
     {
+        to_update_tiles[tick_tile_count - 1].how_to_update = Tick_Types::NOTHING;
         return;
     }
 
     uint24_t current_x = current.x;
     uint24_t current_y = current.y;
     Tick_Types how_to_update = current.how_to_update;
+
+    uint24_t hashedCoord = hashCoords(current_x, current_y);
 
     uint8_t left_tile = 0, right_tile = 0, up_tile = 0, down_tile = 0;
 
@@ -104,12 +134,12 @@ void concurrent_tick(tinystl::unordered_map<uint24_t, uint8_t> &modified_tiles)
             {
                 if (contains(live_wire_tiles, 3, up_tile) || contains(live_wire_tiles, 3, down_tile))
                 {
-                    modified_tiles[hashCoords(current_x, current_y)] = 2;
+                    modified_tiles[hashedCoord] = 2;
                     tilemap_buffer[current_x % 128][current_y % 128] = 2;
                 }
                 else
                 {
-                    modified_tiles[hashCoords(current_x, current_y)] = 4;
+                    modified_tiles[hashedCoord] = 4;
                     tilemap_buffer[current_x % 128][current_y % 128] = 4;
                 }
             }
@@ -117,12 +147,12 @@ void concurrent_tick(tinystl::unordered_map<uint24_t, uint8_t> &modified_tiles)
             {
                 if (contains(live_wire_tiles, 3, up_tile) || contains(live_wire_tiles, 3, down_tile))
                 {
-                    modified_tiles[hashCoords(current_x, current_y)] = 6;
+                    modified_tiles[hashedCoord] = 6;
                     tilemap_buffer[current_x % 128][current_y % 128] = 6;
                 }
                 else
                 {
-                    modified_tiles[hashCoords(current_x, current_y)] = 2;
+                    modified_tiles[hashedCoord] = 2;
                     tilemap_buffer[current_x % 128][current_y % 128] = 2;
                 }
             }
@@ -134,12 +164,12 @@ void concurrent_tick(tinystl::unordered_map<uint24_t, uint8_t> &modified_tiles)
             {
                 if (contains(dead_wire_tiles, 3, up_tile) || contains(dead_wire_tiles, 3, down_tile))
                 {
-                    modified_tiles[hashCoords(current_x, current_y)] = 1;
+                    modified_tiles[hashedCoord] = 1;
                     tilemap_buffer[current_x % 128][current_y % 128] = 1;
                 }
                 else
                 {
-                    modified_tiles[hashCoords(current_x, current_y)] = 3;
+                    modified_tiles[hashedCoord] = 3;
                     tilemap_buffer[current_x % 128][current_y % 128] = 3;
                 }
             }
@@ -147,22 +177,50 @@ void concurrent_tick(tinystl::unordered_map<uint24_t, uint8_t> &modified_tiles)
             {
                 if (contains(dead_wire_tiles, 3, up_tile) || contains(dead_wire_tiles, 3, down_tile))
                 {
-                    modified_tiles[hashCoords(current_x, current_y)] = 5;
+                    modified_tiles[hashedCoord] = 5;
                     tilemap_buffer[current_x % 128][current_y % 128] = 5;
                 }
                 else
                 {
-                    modified_tiles[hashCoords(current_x, current_y)] = 1;
+                    modified_tiles[hashedCoord] = 1;
                     tilemap_buffer[current_x % 128][current_y % 128] = 1;
                 }
             }
             break;
         }
+        if (modified_tiles[hashedCoord] != current_tile_index || number_of_ticks_left == 0)
+        {
+            add_tick_tile(current_x - 1, current_y, left_tile, Tick_Types::ADD);
+            add_tick_tile(current_x, current_y - 1, down_tile, Tick_Types::ADD);
+            add_tick_tile(current_x + 1, current_y, right_tile, Tick_Types::ADD);
+            add_tick_tile(current_x, current_y + 1, up_tile, Tick_Types::ADD);
+        }
+        to_update_tiles[tick_tile_count - 1].how_to_update = Tick_Types::NOTHING;
+        break;
+    case Tick_Types::REMOVE:
+
+        if (current_tile_index == 9)
+        {
+            add_tick_tile(current_x - 1, current_y, left_tile, Tick_Types::UPDATE_ELECTICITY);
+            add_tick_tile(current_x, current_y - 1, down_tile, Tick_Types::UPDATE_ELECTICITY);
+            add_tick_tile(current_x + 1, current_y, right_tile, Tick_Types::UPDATE_ELECTICITY);
+            add_tick_tile(current_x, current_y + 1, up_tile, Tick_Types::UPDATE_ELECTICITY);
+        }
+        modified_tiles[hashedCoord] = 0;
+        tilemap_buffer[current_x][current_y] = 0;
+        add_tick_tile(current_x - 1, current_y, left_tile, Tick_Types::ADD);
+        add_tick_tile(current_x, current_y - 1, down_tile, Tick_Types::ADD);
+        add_tick_tile(current_x + 1, current_y, right_tile, Tick_Types::ADD);
+        add_tick_tile(current_x, current_y + 1, up_tile, Tick_Types::ADD);
+
+        to_update_tiles[tick_tile_count - 1].how_to_update = Tick_Types::NOTHING;
+        break;
+    default:
         break;
     }
     // draw
     gfx_SetDrawScreen();
-    gfx_Sprite(gameTiles_tiles[tilemap_buffer[current_x%128][current_y%128]],(current_x-x)*TILE_SIZE,(current_y-y)*TILE_SIZE);
+    gfx_Sprite(gameTiles_tiles[tilemap_buffer[current_x % 128][current_y % 128]], (current_x - x) * TILE_SIZE, (current_y - y) * TILE_SIZE);
     gfx_SetDrawBuffer();
 }
 

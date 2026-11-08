@@ -32,7 +32,7 @@ uint24_t x = 0, y = 0;
 void init()
 {
     kb_SetMode(MODE_3_CONTINUOUS);
-    //gfx_SetClipRegion(0, 0, BASE_X, BASE_Y);
+    // gfx_SetClipRegion(0, 0, BASE_X, BASE_Y);
     gfx_SetMonospaceFont(8);
     // lcd_Control = 0x13925; // 4bpp //not anymore
     gfx_ZeroScreen();
@@ -65,11 +65,11 @@ void game()
 
     perlinInit(seed);
 
-    preloaded_x = x & 0xFFFF80; 
+    preloaded_x = x & 0xFFFF80;
     preloaded_y = y & 0xFFFF80;
-    
+
     preload_values(modified_tiles);
-    
+
     /*
     true: veritcal is generated (x movement)
     false: horizontal is generated (y movement)
@@ -88,9 +88,9 @@ void game()
 
     render_level(seed, modified_tiles, true);
 
-    //gfx_PrintStringXY("Tasks:", 0, 96);
-    //gfx_SetTextXY(48, 96);
-    //gfx_PrintUInt(0u, 3);
+    // gfx_PrintStringXY("Tasks:", 0, 96);
+    // gfx_SetTextXY(48, 96);
+    // gfx_PrintUInt(0u, 3);
     gfx_PrintStringXY("x:", BASE_X - 5 * TILE_SIZE, 104);
     gfx_SetTextXY(BASE_X - 5 * TILE_SIZE + 16, 104);
     gfx_PrintUInt(x, 8);
@@ -136,8 +136,7 @@ void game()
             if (kb_IsDown(kb_Key2nd))
             {
                 gfx_SetDrawScreen();
-                add_tick_tile(x+4,y+2,tile_selection,Tick_Types::ADD);
-                modified_tiles[hashCoords(x+4,y+2)] = tile_selection;
+                add_tick_tile(x + 4, y + 2, tile_selection, Tick_Types::ADD);
 
                 gfx_GetSprite_NoClip(curser_bg, 64, 32);
                 gfx_TransparentSprite_NoClip(cursor, 64, 32);
@@ -146,14 +145,12 @@ void game()
             }
             if (kb_IsDown(kb_KeyAlpha))
             {
-                if (tilemap_buffer[x  % 128 + 4][y % 128 + 2] != 0)
+                if (tilemap_buffer[x % 128 + 4][y % 128 + 2] != 0)
                 {
                     gfx_SetDrawScreen();
 
-                    tick_tiles[hashCoords(x+4,y+2)] = 2;
-                    tick(tick_tiles, modified_tiles);
+                    add_tick_tile(x + 4, y + 2, tile_selection, Tick_Types::REMOVE);
 
-                    tilemap_buffer[x % 128 + 4][y % 128 + 2] = 0;
                     gfx_Sprite_NoClip(gameTiles_tiles[0], 64, 32);
                     gfx_GetSprite_NoClip(curser_bg, 64, 32);
                     gfx_TransparentSprite_NoClip(cursor, 64, 32);
@@ -190,7 +187,10 @@ void game()
                 gfx_SetDrawBuffer();
             }
         }
-        concurrent_tick(modified_tiles);
+        else
+        {
+            concurrent_tick(modified_tiles);
+        }
         // tick(tick_tiles, modified_tiles,x,y); not needed if nothing happens
     }
 
@@ -280,7 +280,8 @@ void tile_selection_menu(uint8_t &current_selection, const tinystl::unordered_ma
 
     current_selection = possible_tile_selections[cursor_selection];
 
-    while (kb_AnyKey());
+    while (kb_AnyKey())
+        ;
 
     gfx_SetDrawBuffer();
     gfx_SwapDraw();

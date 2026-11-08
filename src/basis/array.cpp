@@ -1,6 +1,6 @@
 #include <stdint.h>
 
-// Returns true if `target` appears in the first `size` elements of `arr`.
+//returns true if `target` appears in the first `size` elements of `arr`.
 template <typename T, typename U>
 bool contains(const T* arr, size_t size, const U& target) {
     for (size_t i = 0; i < size; ++i) {
@@ -9,6 +9,17 @@ bool contains(const T* arr, size_t size, const U& target) {
         }
     }
     return false;
+}
+
+//returns infex of `target` in `arr` or `0` if doesn't exist
+template <typename T, typename U>
+size_t indexof(const T* arr, size_t size, const U& target) {
+    for (size_t i = 0; i < size; ++i) {
+        if (arr[i] == target) {
+            return i;
+        }
+    }
+    return 0;
 }
 
 /*
